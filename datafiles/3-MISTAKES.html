@@ -1,0 +1,2661 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SAA-C03 Mistake Log</title><style>
+*{box-sizing:border-box}
+:root{--bg:#0f1418;--card:#171e24;--line:#26313a;--fg:#e6edf3;--mut:#8b9aa7;--acc:#4aa3df;--ok:#3fb950;--warn:#d29922;--bad:#f85149}
+@media(prefers-color-scheme:light){:root{--bg:#fbfcfd;--card:#fff;--line:#dfe5ea;--fg:#1c2733;--mut:#6b7885;--acc:#0b6bb5;--ok:#1a7f37;--warn:#8a6100;--bad:#b62324}}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+#wrap{display:flex;max-width:1400px;margin:0 auto}
+nav{position:sticky;top:0;align-self:flex-start;height:100vh;overflow-y:auto;flex:0 0 300px;padding:26px 16px;border-right:1px solid var(--line);font-size:13.5px}
+nav .ttl{font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);margin-bottom:12px}
+nav a{display:block;color:var(--mut);text-decoration:none;padding:5px 9px;border-radius:6px;border-left:2px solid transparent}
+nav a:hover{color:var(--fg);background:var(--card)}
+nav a.h3{padding-left:20px;font-size:13px}
+nav a.on{color:var(--acc);border-left-color:var(--acc);background:var(--card)}
+nav .navgrp{margin-bottom:2px}
+nav .navh2{cursor:pointer;padding:6px 9px;border-radius:6px;border-left:2px solid transparent;color:var(--mut);font-weight:600}
+nav .navh2:hover{color:var(--fg);background:var(--card)}
+nav .navh2.on{color:var(--acc);border-left-color:var(--acc);background:var(--card)}
+nav .navkids{padding-left:14px;display:none}
+nav .navgrp.expanded .navkids{display:block}
+nav .navkid{display:block;color:var(--mut);text-decoration:none;padding:4px 9px;font-size:12.5px;border-radius:6px}
+nav .navkid:hover{color:var(--fg);background:var(--card)}
+nav .navctl{display:flex;gap:6px;margin-bottom:14px}
+nav .navctl button{flex:1;background:var(--card);color:var(--fg);border:1px solid var(--line);border-radius:6px;padding:6px 4px;font-size:11.5px;cursor:pointer}
+nav .navctl button:hover{border-color:var(--acc)}
+main{flex:1;min-width:0;padding:34px 44px 120px;max-width:980px}
+h1{font-size:30px;margin:0 0 6px;letter-spacing:-.02em}
+p{margin:12px 0}
+hr{border:0;border-top:1px solid var(--line);margin:32px 0}
+details.sec{border-top:1px solid var(--line);margin:0;padding:0}
+details.sec:last-of-type{border-bottom:1px solid var(--line)}
+summary.sech2{font-size:21px;font-weight:700;margin:0;padding:16px 4px;cursor:pointer;list-style:none;scroll-margin-top:20px;display:flex;align-items:center;gap:8px}
+summary.sech2::-webkit-details-marker{display:none}
+summary.sech2::before{content:"▸";display:inline-block;color:var(--acc);transition:transform .15s;font-size:15px}
+details[open]>summary.sech2::before{transform:rotate(90deg)}
+summary.sech2:hover{color:var(--acc)}
+.secbody{padding:4px 4px 26px}
+h3{font-size:17px;margin:26px 0 10px;color:var(--acc);scroll-margin-top:20px}
+table{border-collapse:collapse;width:100%;margin:10px 0 16px;font-size:14.5px;display:block;overflow-x:auto}
+th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}
+th{background:var(--card);font-weight:600;position:sticky;top:0}
+tbody tr:nth-child(even){background:color-mix(in srgb,var(--card) 55%,transparent)}
+.tfilter{width:100%;background:var(--card);color:var(--fg);border:1px solid var(--line);border-radius:6px;padding:8px 11px;font-size:13.5px;margin:14px 0 4px}
+.tfilter::placeholder{color:var(--mut)}
+.tfilter:focus{outline:none;border-color:var(--acc)}
+.tcount{font-size:11.5px;color:var(--mut);margin:0 0 6px}
+code{background:var(--card);border:1px solid var(--line);border-radius:5px;padding:1px 6px;font-size:13px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;white-space:nowrap}
+td code{color:var(--warn)}
+strong{color:var(--fg);font-weight:650}
+ul,ol{padding-left:24px}li{margin:7px 0}
+blockquote{border-left:3px solid var(--acc);margin:16px 0;padding:2px 16px;color:var(--mut)}
+em{color:var(--mut)}
+#top{position:fixed;right:20px;bottom:20px;background:var(--acc);color:#fff;border:0;border-radius:99px;padding:11px 17px;cursor:pointer;font-size:14px;box-shadow:0 4px 14px rgba(0,0,0,.3)}
+#burger{display:none}
+@media(max-width:900px){
+ nav{display:none;position:fixed;z-index:9;background:var(--bg);width:100%;flex:none;height:100vh}
+ nav.open{display:block}
+ main{padding:20px 16px 100px}
+ #burger{display:block;position:fixed;left:14px;bottom:20px;z-index:11;background:var(--card);color:var(--fg);border:1px solid var(--line);border-radius:99px;padding:11px 17px;cursor:pointer}
+ table{font-size:13px}
+}
+@media print{nav,#top,#burger{display:none}main{max-width:none;padding:0}body{background:#fff;color:#000}details.sec{display:block !important}}
+</style></head><body>
+<div id="wrap"><nav>
+<div class="ttl">Contents</div>
+<div class="navctl"><button id="expandAll">Expand all</button><button id="collapseAll">Collapse all</button></div>
+<div class="navgrp"><div class="navh2" data-target="test-1-udemy-65-q-48-65-74">Test 1 — Udemy (65 Q) — 48/65 = 74%</div></div><div class="navgrp"><div class="navh2" data-target="test-2-udemy-65-q-52-65-80">Test 2 — Udemy (65 Q) — 52/65 = 80%</div></div><div class="navgrp"><div class="navh2" data-target="new-in-test-2-not-in-the-1-019-q-bank">New in Test 2 (not in the 1,019-Q bank)</div></div><div class="navgrp"><div class="navh2" data-target="test-3-udemy-65-q-53-65-82">Test 3 — Udemy (65 Q) — 53/65 = 82%</div></div><div class="navgrp"><div class="navh2" data-target="new-in-test-3-not-in-bank-t1-t2">New in Test 3 (not in bank / T1 / T2)</div></div><div class="navgrp"><div class="navh2" data-target="session-notes-q-amp-a-during-test-3">Session Notes — Q&amp;A during Test 3</div></div><div class="navgrp"><div class="navh2" data-target="test-4-udemy-65-q-54-65-83">Test 4 — Udemy (65 Q) — 54/65 = 83%</div></div><div class="navgrp"><div class="navh2" data-target="new-in-test-4-not-in-bank-t1-t3">New in Test 4 (not in bank / T1–T3)</div></div><div class="navgrp"><div class="navh2" data-target="session-notes-q-amp-a-during-test-4">Session Notes — Q&amp;A during Test 4</div></div><div class="navgrp"><div class="navh2" data-target="test-5-udemy-65-q-48-65-74">Test 5 — Udemy (65 Q) — 48/65 = 74%</div></div><div class="navgrp"><div class="navh2" data-target="new-in-test-5-not-in-bank-t1-t4">New in Test 5 (not in bank / T1–T4)</div></div><div class="navgrp"><div class="navh2" data-target="session-notes-q-amp-a-during-test-5">Session Notes — Q&amp;A during Test 5</div></div><div class="navgrp expanded"><div class="navh2 on" data-target="test-6-udemy-65-q-48-65-74">Test 6 — Udemy (65 Q) — 48/65 = 74%</div></div><div class="navgrp"><div class="navh2" data-target="new-in-test-6-not-in-bank-t1-t5">New in Test 6 (not in bank / T1–T5)</div></div><div class="navgrp"><div class="navh2" data-target="session-notes-q-amp-a-during-test-6">Session Notes — Q&amp;A during Test 6</div></div><div class="navgrp"><div class="navh2" data-target="concept-notes">Concept Notes</div><div class="navkids"><a class="navkid" data-target="concept-notes" href="#savings-plans-vs-ri">Savings Plans vs RI</a><a class="navkid" data-target="concept-notes" href="#sns-sqs-eventbridge-step-functions">SNS · SQS · EventBridge · Step Functions</a><a class="navkid" data-target="concept-notes" href="#kinesis">Kinesis</a><a class="navkid" data-target="concept-notes" href="#databases">Databases</a><a class="navkid" data-target="concept-notes" href="#read-replica-vs-cache">Read replica vs cache</a><a class="navkid" data-target="concept-notes" href="#storage">Storage</a><a class="navkid" data-target="concept-notes" href="#s3-lifecycle">S3 lifecycle</a><a class="navkid" data-target="concept-notes" href="#s3-object-lock">S3 Object Lock</a><a class="navkid" data-target="concept-notes" href="#s3-misc">S3 misc</a><a class="navkid" data-target="concept-notes" href="#networking">Networking</a><a class="navkid" data-target="concept-notes" href="#hybrid-3-layers">Hybrid — 3 layers</a><a class="navkid" data-target="concept-notes" href="#identity">Identity</a><a class="navkid" data-target="concept-notes" href="#organizations">Organizations</a><a class="navkid" data-target="concept-notes" href="#cross-account-networking-cost">Cross-account networking cost</a><a class="navkid" data-target="concept-notes" href="#multi-az-sizing">Multi-AZ sizing</a><a class="navkid" data-target="concept-notes" href="#compute">Compute</a><a class="navkid" data-target="concept-notes" href="#analytics-amp-ai">Analytics &amp;amp; AI</a><a class="navkid" data-target="concept-notes" href="#in-memory">In-memory</a><a class="navkid" data-target="concept-notes" href="#secrets">Secrets</a></div></div><div class="navgrp"><div class="navh2" data-target="cumulative-keyword-hacks">Cumulative Keyword Hacks</div></div><div class="navgrp"><div class="navh2" data-target="recurring-blind-spots">Recurring Blind Spots</div></div>
+</nav>
+<main><h1>SAA-C03 Mistake Log</h1>
+<p>Tests appended below. Keyword Hacks + Blind Spots at the end are cumulative.</p>
+<hr />
+<details class="sec" id="test-1-udemy-65-q-48-65-74-wrap"><summary class="sech2" id="test-1-udemy-65-q-48-65-74">Test 1 — Udemy (65 Q) — 48/65 = 74%</summary><div class="secbody">
+<input class="tfilter" placeholder="Filter this table…" data-target="table-1"><div class="tcount" id="table-1-cnt"></div><table id="table-1">
+<thead>
+<tr>
+<th>Domain</th>
+<th>Wrong/Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>High-Performing</td>
+<td>6/24</td>
+</tr>
+<tr>
+<td>Secure</td>
+<td>5/17</td>
+</tr>
+<tr>
+<td>Resilient</td>
+<td>3/13</td>
+</tr>
+<tr>
+<td>Cost-Optimized</td>
+<td>3/11</td>
+</tr>
+</tbody>
+</table>
+<input class="tfilter" placeholder="Filter this table…" data-target="table-2"><div class="tcount" id="table-2-cnt"></div><table id="table-2">
+<thead>
+<tr>
+<th>#</th>
+<th>Topic</th>
+<th>I picked</th>
+<th>Correct</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>24h data, cost</td>
+<td>Glacier IR</td>
+<td><strong>S3 Standard</strong></td>
+<td>Glacier IR = 90-day min charge</td>
+</tr>
+<tr>
+<td>6</td>
+<td>2×/year, ms latency</td>
+<td>S3 Standard</td>
+<td><strong>Standard-IA</strong></td>
+<td>infrequent + instant</td>
+</tr>
+<tr>
+<td>7</td>
+<td>AMI copy to Region B</td>
+<td>instance + AMI</td>
+<td><strong>instance + AMI + snapshot</strong></td>
+<td>AMI copy auto-creates snapshot</td>
+</tr>
+<tr>
+<td>17</td>
+<td>EFS from other Region</td>
+<td>copy to S3</td>
+<td><strong>inter-Region VPC peering</strong></td>
+<td>don't duplicate data</td>
+</tr>
+<tr>
+<td>18</td>
+<td>1000 msg/s, ordered</td>
+<td>FIFO</td>
+<td><strong>FIFO + batching</strong></td>
+<td>FIFO = 300/s, 3000/s batched</td>
+</tr>
+<tr>
+<td>20</td>
+<td>Partner's RDS, private</td>
+<td>VPC peering + TGW</td>
+<td><strong>NLB + PrivateLink</strong></td>
+<td>expose 1 service, not whole VPC</td>
+</tr>
+<tr>
+<td>23</td>
+<td>SQL Server → Aurora PG</td>
+<td>—</td>
+<td><strong>Babelfish</strong> + SCT/DMS</td>
+<td>T-SQL, no app change</td>
+</tr>
+<tr>
+<td>25</td>
+<td>ASG AZ rebalance</td>
+<td>—</td>
+<td><strong>launch then terminate</strong></td>
+<td>capacity never dips</td>
+</tr>
+<tr>
+<td>27</td>
+<td>global games table</td>
+<td>DynamoDB Global Table</td>
+<td><strong>Aurora Global DB</strong></td>
+<td>minimal refactor = same engine</td>
+</tr>
+<tr>
+<td>34</td>
+<td>MPP + SQL ML</td>
+<td>Athena + "Athena ML"</td>
+<td><strong>Redshift Serverless + Redshift ML</strong></td>
+<td>Athena ML doesn't exist</td>
+</tr>
+<tr>
+<td>44</td>
+<td>extract ingredients</td>
+<td>SageMaker</td>
+<td><strong>Comprehend</strong> custom entity</td>
+<td>managed AI &gt; DIY ML</td>
+</tr>
+<tr>
+<td>46</td>
+<td>geo-block, ALB</td>
+<td>CloudFront geo restriction</td>
+<td><strong>WAF</strong> on ALB</td>
+<td>no CloudFront in architecture</td>
+</tr>
+<tr>
+<td>51</td>
+<td>SNS→Lambda drops</td>
+<td>provision Lambda servers</td>
+<td><strong>Lambda concurrency quota</strong></td>
+<td>default 1,000/Region</td>
+</tr>
+<tr>
+<td>54</td>
+<td>dev deleted tables</td>
+<td>remove all access</td>
+<td><strong>permissions boundary</strong></td>
+<td>cap, don't strip</td>
+</tr>
+<tr>
+<td>55</td>
+<td>serverless sensors</td>
+<td>Firehose → DynamoDB</td>
+<td><strong>SQS + Lambda → DynamoDB</strong></td>
+<td>Firehose can't write DynamoDB</td>
+</tr>
+<tr>
+<td>57</td>
+<td>high random I/O, replicated</td>
+<td>EFS</td>
+<td><strong>Instance Store</strong></td>
+<td>ephemeral OK, app replicates</td>
+</tr>
+<tr>
+<td>59</td>
+<td>EFS access control</td>
+<td>—</td>
+<td><strong>SG + IAM policy</strong></td>
+<td>not NACL</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div></details><details class="sec" id="test-2-udemy-65-q-52-65-80-wrap"><summary class="sech2" id="test-2-udemy-65-q-52-65-80">Test 2 — Udemy (65 Q) — 52/65 = 80%</summary><div class="secbody">
+<input class="tfilter" placeholder="Filter this table…" data-target="table-3"><div class="tcount" id="table-3-cnt"></div><table id="table-3">
+<thead>
+<tr>
+<th>Domain</th>
+<th>Wrong/Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Secure</td>
+<td>5/17</td>
+</tr>
+<tr>
+<td>Cost-Optimized</td>
+<td>4/11 ← weakest</td>
+</tr>
+<tr>
+<td>Resilient</td>
+<td>3/13</td>
+</tr>
+<tr>
+<td>High-Performing</td>
+<td>1/24</td>
+</tr>
+</tbody>
+</table>
+<input class="tfilter" placeholder="Filter this table…" data-target="table-4"><div class="tcount" id="table-4-cnt"></div><table id="table-4">
+<thead>
+<tr>
+<th>#</th>
+<th>Topic</th>
+<th>I picked</th>
+<th>Correct</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>40</td>
+<td>same KMS key, 2 Regions</td>
+<td>convert key to multi-Region</td>
+<td><strong>new multi-Region key + replica</strong></td>
+<td>keys can't be converted</td>
+</tr>
+<tr>
+<td>43</td>
+<td>block self-granting admin</td>
+<td>boundary on <strong>group</strong></td>
+<td><strong>boundary on each user</strong></td>
+<td>boundaries ≠ groups</td>
+</tr>
+<tr>
+<td>49</td>
+<td>steady 80, peak 300</td>
+<td>20 RI + Spot</td>
+<td><strong>80 RI</strong> + OD + Spot</td>
+<td>commit to steady-state</td>
+</tr>
+<tr>
+<td>51</td>
+<td>per-prefix S3 access</td>
+<td>giant bucket policy</td>
+<td><strong>S3 Access Points</strong></td>
+<td>scales, low overhead</td>
+</tr>
+<tr>
+<td>52</td>
+<td>blue/green, DNS caching</td>
+<td>Route 53 weighted</td>
+<td><strong>Global Accelerator</strong></td>
+<td>DNS caching defeats R53</td>
+</tr>
+<tr>
+<td>54</td>
+<td>cheapest multi-account</td>
+<td>VPC peering</td>
+<td><strong>RAM shared subnet</strong></td>
+<td>repeat of T1</td>
+</tr>
+<tr>
+<td>55</td>
+<td>≥4 survive AZ loss</td>
+<td>2 AZ × 4</td>
+<td><strong>3 AZ × 2</strong></td>
+<td>repeat pattern</td>
+</tr>
+<tr>
+<td>58</td>
+<td>shared services + TGW</td>
+<td>Transit VPC</td>
+<td><strong>Shared Services VPC</strong></td>
+<td>repeat of T1</td>
+</tr>
+<tr>
+<td>59</td>
+<td>Multi-AZ engine upgrade</td>
+<td>standby first</td>
+<td><strong>both at once, downtime</strong></td>
+<td>repeat of T1</td>
+</tr>
+<tr>
+<td>61</td>
+<td>Redshift UNLOAD cross-acct</td>
+<td>bad bucket policy</td>
+<td><strong>uploader owns object</strong></td>
+<td>S3 default ownership</td>
+</tr>
+<tr>
+<td>62</td>
+<td>slow app boot</td>
+<td>User-Data</td>
+<td><strong>EC2 Hibernate</strong></td>
+<td>repeat of T1</td>
+</tr>
+<tr>
+<td>63</td>
+<td>ASG terminate order</td>
+<td>oldest launch template</td>
+<td><strong>oldest launch config</strong></td>
+<td>config &gt; template</td>
+</tr>
+<tr>
+<td>64</td>
+<td>ASG won't kill unhealthy</td>
+<td>—</td>
+<td><strong>Impaired + ELB check + grace period</strong></td>
+<td>see notes</td>
+</tr>
+</tbody>
+</table>
+<p><strong>6 of 13 were Test 1 repeats</strong> → RAM, AZ math, Shared Services VPC, Multi-AZ upgrade, Hibernate, launch config.</p>
+<hr />
+</div></details><details class="sec" id="new-in-test-2-not-in-the-1-019-q-bank-wrap"><summary class="sech2" id="new-in-test-2-not-in-the-1-019-q-bank">New in Test 2 (not in the 1,019-Q bank)</summary><div class="secbody">
+<p><strong>KMS multi-Region</strong>
+- single vs multi-Region = fixed at creation, no conversion
+- same key in 2 Regions → <strong>primary + replica key</strong>
+- same alias ≠ same key</p>
+<p><strong>S3 cross-account ownership</strong>
+- uploader's account owns the object, not bucket owner
+- fix: <code>bucket-owner-full-control</code> ACL · Object Ownership = bucket owner enforced · cross-account role
+- "bucket owner denied" = default behaviour, not a policy bug</p>
+<p><strong>ASG health checks</strong>
+- <strong>grace period</strong> — ignores all health results after launch
+- <strong>type = EC2 by default</strong> → ELB failures ignored until type set to ELB
+- <strong>custom check</strong> → <code>SetInstanceHealth</code> → does terminate
+- <strong>Impaired</strong> → waits few min for recovery</p>
+<p><strong>Blue/green traffic shift</strong>
+- Route 53 weighted = DNS, beaten by caching
+- <strong>Global Accelerator traffic dial</strong> = instant, anycast IP
+- CodeDeploy = deployment mechanics, not traffic split</p>
+<p><strong>Commitment sizing</strong>
+- commit = steady-state number ("needs X, Y% of time")
+- not the floor, not the peak
+- shape: N RI + On-Demand + Spot via ASG</p>
+<p><strong>Misc</strong>
+- permissions boundary → user/role only, never group
+- License Manager → RAM-shareable (with subnets, TGW, R53 Resolver rules)</p>
+<hr />
+</div></details><details class="sec" id="test-3-udemy-65-q-53-65-82-wrap"><summary class="sech2" id="test-3-udemy-65-q-53-65-82">Test 3 — Udemy (65 Q) — 53/65 = 82%</summary><div class="secbody">
+<input class="tfilter" placeholder="Filter this table…" data-target="table-5"><div class="tcount" id="table-5-cnt"></div><table id="table-5">
+<thead>
+<tr>
+<th>Domain</th>
+<th>Wrong/Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>High-Performing</td>
+<td>5/25</td>
+</tr>
+<tr>
+<td>Secure</td>
+<td>3/19</td>
+</tr>
+<tr>
+<td>Resilient</td>
+<td>3/13</td>
+</tr>
+<tr>
+<td>Cost-Optimized</td>
+<td>1/8 ← fixed from T2</td>
+</tr>
+</tbody>
+</table>
+<input class="tfilter" placeholder="Filter this table…" data-target="table-6"><div class="tcount" id="table-6-cnt"></div><table id="table-6">
+<thead>
+<tr>
+<th>#</th>
+<th>Topic</th>
+<th>I picked</th>
+<th>Correct</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>ECS scale-out metric</td>
+<td>CloudWatch alarm CPU</td>
+<td><strong>ECS service CPU</strong></td>
+<td>metric source = ECS Service, not alarm/ALB</td>
+</tr>
+<tr>
+<td>2</td>
+<td>on-prem AD + SQL Server + trust</td>
+<td>AD Connector</td>
+<td><strong>AWS Managed Microsoft AD</strong></td>
+<td>AD Connector = login proxy only, no trust, no directory-aware workloads</td>
+</tr>
+<tr>
+<td>14</td>
+<td>10 GB up+download, global</td>
+<td>CloudFront</td>
+<td><strong>S3 Transfer Acceleration</strong></td>
+<td>CloudFront ≠ upload path</td>
+</tr>
+<tr>
+<td>17</td>
+<td>SG vs NACL statefulness</td>
+<td>NACL stateful</td>
+<td><strong>SG stateful, NACL stateless</strong></td>
+<td>SG remembers connection</td>
+</tr>
+<tr>
+<td>25</td>
+<td>leaderboard, complex algo</td>
+<td>ElastiCache for JOINs</td>
+<td><strong>ElastiCache for compute-intensive</strong></td>
+<td>cache ≠ query engine</td>
+</tr>
+<tr>
+<td>41</td>
+<td>central OS patching, least ops</td>
+<td>manual SSM Agent + cron</td>
+<td><strong>Default Host Management Config (SSM Quick Setup)</strong></td>
+<td>auto-attaches SSM perms</td>
+</tr>
+<tr>
+<td>44</td>
+<td>Windows apps + self-managed AD</td>
+<td>EFS</td>
+<td><strong>FSx for Windows</strong></td>
+<td>EFS = Linux/NFS, no AD</td>
+</tr>
+<tr>
+<td>49</td>
+<td>R53 Resolver both directions</td>
+<td>inbound does forwarding</td>
+<td><strong>inbound = they ask us; outbound = we ask them</strong></td>
+<td>swapped direction</td>
+</tr>
+<tr>
+<td>52</td>
+<td>spot persistent reopen</td>
+<td>reopens after <em>you</em> stop it</td>
+<td><strong>only after AWS interruption</strong></td>
+<td>user-stop ≠ reopen</td>
+</tr>
+<tr>
+<td>59</td>
+<td>real-time health analytics</td>
+<td>SQS + Lambda</td>
+<td><strong>Kinesis Data Streams + Kinesis Data Analytics</strong></td>
+<td>"real-time analytics" → Kinesis</td>
+</tr>
+<tr>
+<td>62</td>
+<td>Python microservice, min ops</td>
+<td>App Runner</td>
+<td><strong>Lambda + API Gateway + provisioned concurrency</strong></td>
+<td>single module → Lambda</td>
+</tr>
+<tr>
+<td>64</td>
+<td>different key per S3 object</td>
+<td>SSE-KMS + encryption context</td>
+<td><strong>SSE-S3</strong></td>
+<td>SSE-S3 already uses unique key per object</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Repeats from T1/T2:</strong> none major — new failure areas are metric-source precision and service-vs-service nuance.</p>
+<hr />
+</div></details><details class="sec" id="new-in-test-3-not-in-bank-t1-t2-wrap"><summary class="sech2" id="new-in-test-3-not-in-bank-t1-t2">New in Test 3 (not in bank / T1 / T2)</summary><div class="secbody">
+<p><strong>SSM Default Host Management Configuration</strong>
+- Quick Setup feature → auto-enables SSM management + IAM perms on all EC2 in account/Region
+- hint: "least admin overhead" + role exists but lacks <code>AmazonSSMManagedInstanceCore</code>
+- beats: manual agent install, role swap, second role, Hybrid Activation (on-prem only)</p>
+<p><strong>SSE-S3 per-object keys</strong>
+- SSE-S3 = unique data key per object, already
+- SSE-KMS + encryption context ≠ different key per object (context = auth binding, not key derivation)
+- "different key for each file" → SSE-S3</p>
+<p><strong>ElastiCache scope</strong>
+- ✅ compute-intensive workloads, leaderboards (Redis sorted sets), session store, cache
+- ❌ complex JOIN queries (that's a relational DB)</p>
+<p><strong>ECS metric sources</strong>
+- Service Auto Scaling target-tracks <code>ECS/ClusterName+ServiceName</code> CPU/Memory
+- ALB, ALB target group, CloudWatch alarm → not CPU metric sources</p>
+<p><strong>Spot persistent nuance</strong>
+- AWS interrupts → request reopens ✅
+- you stop it manually → request does NOT reopen ❌
+- cancel request ≠ terminate instance
+- Spot Fleet maintains target capacity automatically</p>
+<hr />
+</div></details><details class="sec" id="session-notes-q-amp-a-during-test-3-wrap"><summary class="sech2" id="session-notes-q-amp-a-during-test-3">Session Notes — Q&amp;A during Test 3</summary><div class="secbody">
+<p><strong>Global Accelerator</strong>
+- "too many IPs to whitelist in firewall" + multi-Region ALBs → <strong>2 static anycast IPs</strong></p>
+<p><strong>Governance stack</strong></p>
+<input class="tfilter" placeholder="Filter this table…" data-target="table-7"><div class="tcount" id="table-7-cnt"></div><table id="table-7">
+<thead>
+<tr>
+<th>Need</th>
+<th>Service</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>self-service pre-approved products</td>
+<td>Service Catalog</td>
+</tr>
+<tr>
+<td>push same stack to many accts/Regions</td>
+<td>CloudFormation StackSets</td>
+</tr>
+<tr>
+<td>share existing resources cross-acct</td>
+<td>RAM</td>
+</tr>
+<tr>
+<td>detect non-compliance (after the fact)</td>
+<td>Config</td>
+</tr>
+<tr>
+<td>hard guardrail / max permissions</td>
+<td>SCP</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>SCP <strong>restricts</strong>, doesn't validate</li>
+<li>SCP exempt: management account, service-linked roles</li>
+<li>SCP applies to member-acct root user ✅</li>
+</ul>
+<p><strong>SG source — can / cannot</strong>
+- ✅ CIDR, another SG (same VPC or peered), prefix list
+- ❌ NACL, subnet ID, hostname/DNS, IAM role, IGW, SG in unpeered VPC</p>
+<p><strong>Stateful vs stateless</strong>
+- SG = stateful (return traffic auto-allowed, allow-only, no deny)
+- NACL = stateless (write both directions, numbered order, supports deny)
+- mnemonic: SG <em>remembers</em> the connection</p>
+<p><strong>Block an IP</strong></p>
+<input class="tfilter" placeholder="Filter this table…" data-target="table-8"><div class="tcount" id="table-8-cnt"></div><table id="table-8">
+<thead>
+<tr>
+<th>Level</th>
+<th>Tool</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>subnet, any protocol</td>
+<td>NACL deny rule</td>
+</tr>
+<tr>
+<td>HTTP/S app layer, geo, rate</td>
+<td>WAF</td>
+</tr>
+<tr>
+<td>multi-account central policy</td>
+<td>Firewall Manager</td>
+</tr>
+<tr>
+<td>—</td>
+<td>SG can't deny, only allow</td>
+</tr>
+</tbody>
+</table>
+<p><strong>NAT GW vs NAT instance</strong>
+- GW: managed, HA in AZ, autoscale 100 Gbps, no SG, IPv4 only
+- Instance: EC2, SPOF, can be bastion, port forwarding, has SG
+- both: outbound internet for private subnets
+- IPv6 outbound → <strong>egress-only IGW</strong></p>
+<p><strong>Route 53 Resolver</strong>
+- <strong>In = they ask us</strong> (on-prem → AWS names)
+- <strong>Out = we ask them</strong> (AWS → on-prem names, conditional forwarding rules)
+- Resolver always lives in AWS, never on-prem</p>
+<p><strong>VPC endpoints</strong>
+- Gateway (free, route table): <strong>S3, DynamoDB only</strong>
+- Interface / PrivateLink (ENI, paid): everything else incl. <strong>SQS, SNS, KMS, Secrets Manager</strong>
+- endpoint removes need for NAT</p>
+<p><strong>Direct Connect VIFs</strong>
+- Private VIF → VPC via VGW
+- Public VIF → AWS public services (S3, DynamoDB)
+- Transit VIF → Transit Gateway, many VPCs</p>
+<p><strong>Site-to-Site VPN (IPSec)</strong>
+- CGW (on-prem) ↔ VGW/TGW (AWS), over internet, encrypted
+- correct config = <strong>2 tunnels</strong>, each own public IP, HA; static or BGP
+- single-tunnel answers = wrong</p>
+<p><strong>EC2 tenancy conflict</strong>
+- dedicated at <em>either</em> LT or VPC level → instance is <strong>dedicated</strong>
+- most restrictive wins</p>
+<p><strong>AZ across accounts</strong>
+- AZ <em>names</em> (us-east-1a) randomized per account
+- AZ <strong>IDs</strong> (use1-az1) consistent → use for same-physical-AZ guarantees
+- default VPC subnet IDs differ per account</p>
+<p><strong>CloudWatch auto-recover</strong>
+- trigger metric = <strong>StatusCheckFailed_System</strong> (host/hardware), not instance check
+- "impaired" = AWS-side system check failure
+- keeps: instance ID, private/public/EIP, metadata
+- loses: <strong>RAM contents</strong> (stop+start on new hardware)</p>
+<p><strong>Data transfer to AWS</strong></p>
+<input class="tfilter" placeholder="Filter this table…" data-target="table-9"><div class="tcount" id="table-9-cnt"></div><table id="table-9">
+<thead>
+<tr>
+<th>Need</th>
+<th>Service</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>online, automated, accelerated → S3/EFS/FSx</td>
+<td><strong>DataSync</strong></td>
+</tr>
+<tr>
+<td>ongoing hybrid cached access</td>
+<td>File Gateway</td>
+</tr>
+<tr>
+<td>offline, low bandwidth, bulk</td>
+<td>Snowball Edge</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Misc</strong>
+- API Gateway <strong>HTTP API</strong> = native JWT authorizer; REST API needs Lambda/Cognito authorizer
+- API Gateway = rate limit / burst / quota per client (usage plans + API keys)
+- encryption is one-way: encrypted snapshot/AMI → copy is <strong>always</strong> encrypted; can only change KMS key
+- AMI cross-account share = launch permission + share the KMS key if encrypted
+- S3 alone = static only; dynamic → + CloudFront Functions / Lambda@Edge / S3 Object Lambda
+- reduce replica lag: bigger replica class, PIOPS, less primary write load → or <strong>Aurora replicas</strong> (near-zero lag)
+- PTR record = reverse DNS (IP → hostname)
+- Policy = doc; Statement = one rule (Effect/Action/Resource/Condition/Principal); Role = no long-term creds, trust policy + permission policy
+- App Runner = whole containerized/web app; Lambda + API GW = single microservice module</p>
+<hr />
+</div></details><details class="sec" id="test-4-udemy-65-q-54-65-83-wrap"><summary class="sech2" id="test-4-udemy-65-q-54-65-83">Test 4 — Udemy (65 Q) — 54/65 = 83%</summary><div class="secbody">
+<input class="tfilter" placeholder="Filter this table…" data-target="table-10"><div class="tcount" id="table-10-cnt"></div><table id="table-10">
+<thead>
+<tr>
+<th>Domain</th>
+<th>Wrong/Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cost-Optimized</td>
+<td>4/11 ← regressed</td>
+</tr>
+<tr>
+<td>Resilient</td>
+<td>3/19</td>
+</tr>
+<tr>
+<td>Secure</td>
+<td>2/15</td>
+</tr>
+<tr>
+<td>High-Performing</td>
+<td>2/20</td>
+</tr>
+</tbody>
+</table>
+<input class="tfilter" placeholder="Filter this table…" data-target="table-11"><div class="tcount" id="table-11-cnt"></div><table id="table-11">
+<thead>
+<tr>
+<th>#</th>
+<th>Topic</th>
+<th>I picked</th>
+<th>Correct</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Beanstalk 45-min install</td>
+<td>store install files in S3</td>
+<td><strong>EC2 user data for dynamic parts</strong> (+ golden AMI for static)</td>
+<td>S3 still installs every boot</td>
+</tr>
+<tr>
+<td>7</td>
+<td>CloudFront multi-origin</td>
+<td>by <strong>price class</strong></td>
+<td>by <strong>content type</strong> (cache behavior path pattern)</td>
+<td>price class = cost, not routing</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Lambda→RDS short-lived creds</td>
+<td>restrict RDS SG to Lambda SG</td>
+<td><strong>IAM role on Lambda + IAM DB auth</strong></td>
+<td>SG = network, not authentication</td>
+</tr>
+<tr>
+<td>13</td>
+<td>EFS spiky, low avg throughput</td>
+<td>EFS IA storage class</td>
+<td><strong>Burst throughput + General Purpose + Standard</strong></td>
+<td>IA = storage cost, not throughput</td>
+</tr>
+<tr>
+<td>19</td>
+<td>ELB+ASG 3 AZ, HA + cost</td>
+<td>min capacity <strong>3</strong></td>
+<td>min capacity <strong>2</strong></td>
+<td>2 = HA across 2 AZ, cheaper</td>
+</tr>
+<tr>
+<td>20</td>
+<td>resource-based policy type</td>
+<td>ACL</td>
+<td><strong>Trust policy</strong></td>
+<td>trust policy = resource-based on a role</td>
+</tr>
+<tr>
+<td>24</td>
+<td>prevent accidental table delete</td>
+<td>PITR</td>
+<td><strong>Deletion protection</strong></td>
+<td>PITR recovers <em>after</em>; protection <em>prevents</em></td>
+</tr>
+<tr>
+<td>38</td>
+<td>Aurora storage config</td>
+<td>Magnetic (Standard)</td>
+<td><strong>Aurora I/O-Optimized</strong></td>
+<td>Aurora has no EBS types (repeat)</td>
+</tr>
+<tr>
+<td>40</td>
+<td>GPS reads/writes/sec</td>
+<td>read-replica autoscaling + RDS Proxy</td>
+<td><strong>ElastiCache for Redis + TTL</strong></td>
+<td>replicas lag; in-memory for hot geo data</td>
+</tr>
+<tr>
+<td>50</td>
+<td>on-prem data growth → AWS</td>
+<td>Storage GW <strong>stored</strong> volumes</td>
+<td><strong>cached</strong> volumes</td>
+<td>repeat of T3 Q&amp;A</td>
+</tr>
+<tr>
+<td>53</td>
+<td>images/thumbnails lifecycle</td>
+<td>One Zone-IA + prefix</td>
+<td><strong>Standard-IA + prefix</strong></td>
+<td>"survive whole AZ loss" kills One Zone</td>
+</tr>
+</tbody>
+</table>
+<p><strong>4 of 11 were things we discussed live before the test</strong> (Aurora storage, Storage GW cached, One Zone-IA/AZ, Lambda SG vs IAM) → review the log before starting, not after.</p>
+<hr />
+</div></details><details class="sec" id="new-in-test-4-not-in-bank-t1-t3-wrap"><summary class="sech2" id="new-in-test-4-not-in-bank-t1-t3">New in Test 4 (not in bank / T1–T3)</summary><div class="secbody">
+<p><strong>DynamoDB deletion protection</strong>
+- <strong>prevents</strong> table deletion (even by admin) until toggled off
+- PITR / backups = <strong>recover after</strong> deletion, not prevent
+- "prevent human error, minimal ongoing effort" → deletion protection</p>
+<p><strong>Trust policy = resource-based</strong></p>
+<input class="tfilter" placeholder="Filter this table…" data-target="table-12"><div class="tcount" id="table-12-cnt"></div><table id="table-12">
+<thead>
+<tr>
+<th>Policy</th>
+<th>Attached to</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Identity policy</td>
+<td>user/group/role</td>
+<td>identity-based</td>
+</tr>
+<tr>
+<td><strong>Trust policy</strong></td>
+<td><strong>role</strong> (who may assume it)</td>
+<td><strong>resource-based</strong></td>
+</tr>
+<tr>
+<td>Bucket / KMS key / SQS policy</td>
+<td>resource</td>
+<td>resource-based</td>
+</tr>
+<tr>
+<td>Permissions boundary</td>
+<td>user/role</td>
+<td>limit, not grant</td>
+</tr>
+<tr>
+<td>ACL</td>
+<td>S3/legacy</td>
+<td>not a policy</td>
+</tr>
+</tbody>
+</table>
+<p><strong>EFS throughput vs storage class — separate knobs</strong>
+- throughput mode: <strong>Bursting</strong> (credits, spiky) · <strong>Elastic</strong> (auto) · <strong>Provisioned</strong> (fixed, pay more)
+- performance mode: <strong>General Purpose</strong> (low latency, default) · <strong>Max I/O</strong> (high parallel, higher latency)
+- storage class: Standard · IA · Archive → <strong>cost of storage only, no throughput effect</strong>
+- "spiky bursts, low average, no manual provisioning" → Bursting + General Purpose + Standard</p>
+<p><strong>ASG min capacity vs AZ count</strong>
+- min = <strong>2</strong> gives HA (2 AZ) at lowest cost; ASG rebalances across the 3 AZs when scaling
+- min = 3 = one per AZ but pays for idle capacity → fails "optimize cost"
+- min = 1 → no HA
+- rule: HA floor is <strong>2</strong>, not "one per AZ"</p>
+<p><strong>Beanstalk long install</strong>
+- static/heavy deps → <strong>golden AMI</strong> (pre-baked)
+- dynamic per-instance parts → <strong>EC2 user data</strong> at boot
+- <code>.ebextensions</code> / S3-hosted installers → still install every launch</p>
+<hr />
+</div></details><details class="sec" id="session-notes-q-amp-a-during-test-4-wrap"><summary class="sech2" id="session-notes-q-amp-a-during-test-4">Session Notes — Q&amp;A during Test 4</summary><div class="secbody">
+<p><strong>Beanstalk startup</strong>
+- slow bootstrap → custom/golden AMI; dynamic bits → user data
+- S3-hosted install files = faster download, still slow boot
+- no Beanstalk-level boot cache feature</p>
+<p><strong>S3 → S3 cross-Region, one-time, PB</strong>
+- existing objects → <strong>S3 Batch Replication</strong>
+- CRR = new objects only (trap)
+- <code>aws s3 sync</code> = valid but single-machine
+- S3TA/Snowball = irrelevant (client↔S3 / on-prem only)</p>
+<p><strong>Big-file uploads</strong>
+- single PUT max <strong>5 GB</strong> → 1 TB file <em>requires</em> <strong>multipart</strong> (max 5 TB)
+- "application uploads large files" → multipart
+- "migrate X TB from data center, limited bandwidth" → Snowball
+- DX = ongoing private connectivity, weeks to provision, still needs multipart</p>
+<p><strong>VPN throughput</strong>
+- 1 tunnel = <strong>1.25 Gbps</strong> cap
+- more throughput → multiple VPN connections + <strong>ECMP over Transit Gateway</strong> (VGW does not support ECMP)</p>
+<p><strong>CloudFront features</strong></p>
+<input class="tfilter" placeholder="Filter this table…" data-target="table-13"><div class="tcount" id="table-13-cnt"></div><table id="table-13">
+<thead>
+<tr>
+<th>Feature</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cache behaviors + path patterns</td>
+<td>route to <strong>multiple origins</strong> by content</td>
+</tr>
+<tr>
+<td>Origin Group</td>
+<td><strong>primary + secondary failover</strong> (on 4xx/5xx)</td>
+</tr>
+<tr>
+<td>Price Class (100/200/All)</td>
+<td>cost vs edge coverage — <strong>not routing</strong></td>
+</tr>
+<tr>
+<td>Field-Level Encryption</td>
+<td>encrypt specific form fields at edge w/ public key</td>
+</tr>
+<tr>
+<td>OAC</td>
+<td>lock S3 origin to CloudFront</td>
+</tr>
+<tr>
+<td>Signed URL / cookie</td>
+<td>restricted content</td>
+</tr>
+<tr>
+<td><strong>No KMS</strong></td>
+<td>CloudFront doesn't use KMS</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Security groups</strong>
+- RDS → yes, normal VPC SG ("DB Security Group" = legacy trap)
+- Lambda → only if <strong>VPC-attached</strong> (ENI); default Lambda has no SG</p>
+<p><strong>Read replica vs ElastiCache</strong>
+- "without changing application logic" → <strong>read replica</strong>
+- "thousands of reads+writes/sec, hot data, sub-ms" → <strong>ElastiCache</strong> (accepts app changes)
+- replica lag makes replicas wrong for real-time-current data</p>
+<p><strong>HPC network performance</strong>
+- tightly coupled node-to-node → <strong>EFA</strong>, <strong>cluster placement group</strong>, <strong>enhanced networking (ENA/SR-IOV)</strong>
+- dedicated tenancy = isolation only, <strong>zero</strong> perf benefit (distractor)
+- capacity reservation = availability, not performance
+- Elastic Inference = ML inference, unrelated</p>
+<p><strong>Static IP whitelisting</strong>
+- <strong>NLB</strong> = only ELB with static IP / assignable EIP per AZ
+- ALB/CLB = changing IPs behind DNS
+- "dynamic EIPs on ASG" = distractor, breaks on scale in/out
+- outbound to partner needing fixed source IP → <strong>NAT GW + EIP</strong>
+- many IPs across SGs/route tables → <strong>Managed Prefix List</strong></p>
+<p><strong>Aurora</strong>
+- deployment: Provisioned · <strong>Serverless v2</strong> (0.5 ACU steps) · Global DB · (v1 legacy)
+- storage config: <strong>Standard</strong> (pay per I/O) vs <strong>I/O-Optimized</strong> (no I/O charges, ~30% higher base)
+- switch to I/O-Optimized when I/O &gt; 25% of bill
+- <strong>no gp2/io1/magnetic options exist</strong> → eliminate immediately</p>
+<p><strong>Predictive vs scheduled scaling</strong>
+- "forecast / historical patterns / ML" → <strong>predictive</strong>
+- "fixed known time, e.g. Mon 9am" → scheduled
+- unplanned real-time spikes → dynamic (target tracking)
+- AWS recommends <strong>predictive + target tracking together</strong></p>
+<p><strong>Hybrid network hub</strong>
+- TGW attaches: VPC · VPN · DX (Transit VIF) · TGW peering · Connect
+- multi-Region + multiple DX → <strong>DX Gateway + Transit Gateway</strong>
+- "central hub, least ops" → TGW (Transit VPC = legacy trap)</p>
+<p><strong>Storage Gateway volumes</strong></p>
+<input class="tfilter" placeholder="Filter this table…" data-target="table-14"><div class="tcount" id="table-14-cnt"></div><table id="table-14">
+<thead>
+<tr>
+<th>Mode</th>
+<th>Primary data</th>
+<th>Use when</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Cached</strong></td>
+<td>S3</td>
+<td>on-prem running out of space, extend capacity</td>
+</tr>
+<tr>
+<td><strong>Stored</strong></td>
+<td>on-prem (full copy)</td>
+<td>must keep all data local, S3 for DR snapshots</td>
+</tr>
+<tr>
+<td>- "extend storage capacity to AWS" → <strong>cached</strong> (even if question mentions retrieval fees — S3 Standard has none)</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>S3 lifecycle</strong>
+- filter by <strong>prefix</strong>, <strong>tag</strong>, or <strong>object size</strong> → different rules per folder
+- <strong>One Zone-IA only for reproducible data</strong>; any "survive AZ failure / highly available" → Standard-IA</p>
+<p><strong>EFS mount targets</strong>
+- = ENI with IP in a subnet, <strong>one per AZ</strong>
+- create in every AZ with instances; SG on mount target must allow <strong>TCP 2049</strong>
+- cross-Region: not mountable directly → <strong>EFS Replication</strong> (read-only) or peering/TGW</p>
+<p><strong>DR strategies</strong></p>
+<input class="tfilter" placeholder="Filter this table…" data-target="table-15"><div class="tcount" id="table-15-cnt"></div><table id="table-15">
+<thead>
+<tr>
+<th>Strategy</th>
+<th>Running in AWS</th>
+<th>RTO</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Backup &amp; Restore</td>
+<td>nothing</td>
+<td>hours</td>
+</tr>
+<tr>
+<td>Pilot Light</td>
+<td>core/DB only, servers <strong>off</strong></td>
+<td>10s of min</td>
+</tr>
+<tr>
+<td><strong>Warm Standby</strong></td>
+<td>scaled-down, <strong>fully functional, running</strong></td>
+<td>minutes</td>
+</tr>
+<tr>
+<td>Multi-Site</td>
+<td>full-size active-active</td>
+<td>~zero</td>
+</tr>
+</tbody>
+</table>
+<p><strong>ALB certificates</strong>
+- multiple root domains on one listener → <strong>SNI</strong> (up to 25 certs)
+- wildcard covers <strong>one</strong> root domain only
+- SSL security policy = ciphers/TLS versions, not certs</p>
+<p><strong>S3 → Kinesis</strong>
+- existing <strong>+</strong> ongoing in one managed service → <strong>DMS</strong> (full load + CDC)
+- new objects only → S3 event → Lambda → PutRecord
+- S3 events can't target KDS directly (only SNS/SQS/Lambda/EventBridge)</p>
+<hr />
+</div></details><details class="sec" id="test-5-udemy-65-q-48-65-74-wrap"><summary class="sech2" id="test-5-udemy-65-q-48-65-74">Test 5 — Udemy (65 Q) — 48/65 = 74%</summary><div class="secbody">
+<input class="tfilter" placeholder="Filter this table…" data-target="table-16"><div class="tcount" id="table-16-cnt"></div><table id="table-16">
+<thead>
+<tr>
+<th>Domain</th>
+<th>Wrong/Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>High-Performing</td>
+<td>6/21</td>
+</tr>
+<tr>
+<td>Secure</td>
+<td>5/18</td>
+</tr>
+<tr>
+<td>Resilient</td>
+<td>4/16</td>
+</tr>
+<tr>
+<td>Cost-Optimized</td>
+<td>2/10</td>
+</tr>
+</tbody>
+</table>
+<input class="tfilter" placeholder="Filter this table…" data-target="table-17"><div class="tcount" id="table-17-cnt"></div><table id="table-17">
+<thead>
+<tr>
+<th>#</th>
+<th>Topic</th>
+<th>I picked</th>
+<th>Correct</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>6</td>
+<td>KDS ProvisionedThroughputExceeded, 1-by-1 sends</td>
+<td>increase shards</td>
+<td><strong>batch messages</strong></td>
+<td>fix producer pattern before scaling</td>
+</tr>
+<tr>
+<td>17</td>
+<td>EBS HIPAA, volume↔instance data</td>
+<td>NOT encrypted</td>
+<td><strong>encrypted</strong></td>
+<td>EBS encryption covers data-in-transit volume↔instance too</td>
+</tr>
+<tr>
+<td>20</td>
+<td>Linux SFTP shared FS, modernize</td>
+<td>FSx for Lustre + public endpoint</td>
+<td><strong>EFS + VPC endpoint + POSIX/IAM</strong></td>
+<td>Lustre = HPC scratch; Linux shared FS = EFS</td>
+</tr>
+<tr>
+<td>24</td>
+<td>temp SSH, console, no key distribution</td>
+<td>Instance Connect + SSM disabled + private IP proxy</td>
+<td><strong>Instance Connect, temp public key, public IP</strong></td>
+<td>overcomplicated — IC's actual mechanism</td>
+</tr>
+<tr>
+<td>31</td>
+<td>Multi-AZ failover addressing</td>
+<td>URL changes to standby</td>
+<td><strong>CNAME target updated, URL unchanged</strong></td>
+<td>repeat — wording trap</td>
+</tr>
+<tr>
+<td>32</td>
+<td>10TB max I/O + 450TB durable + 900TB archive</td>
+<td>S3 Standard + Intelligent-Tiering + Deep Archive</td>
+<td><strong>Instance Store + S3 + Glacier</strong></td>
+<td>S3 isn't a "performance" tier — repeat</td>
+</tr>
+<tr>
+<td>40</td>
+<td>EC2 freezes, needs restart</td>
+<td>EventBridge + Lambda + EC2 API reboot</td>
+<td><strong>CloudWatch alarm + EC2 Reboot alarm action</strong></td>
+<td>built-in action exists, don't build custom</td>
+</tr>
+<tr>
+<td>42</td>
+<td>RDS DR resilience</td>
+<td>Multi-AZ backup, single Region</td>
+<td><strong>Multi-AZ backup, cross-Region</strong></td>
+<td>DR = must survive Region loss</td>
+</tr>
+<tr>
+<td>47</td>
+<td>reporters up+download, remote offices</td>
+<td>new S3 bucket per Region</td>
+<td><strong>CloudFront (up+down works)</strong></td>
+<td>repeat — CloudFront isn't download-only</td>
+</tr>
+<tr>
+<td>53</td>
+<td>WAF possible attachments</td>
+<td>"only ALB or API Gateway"</td>
+<td><strong>CloudFront + WAF</strong></td>
+<td>false absolute claim — repeat</td>
+</tr>
+<tr>
+<td>54</td>
+<td>KMS request cost rising, high freq access</td>
+<td>switch to SSE-S3</td>
+<td><strong>S3 Bucket Keys on SSE-KMS</strong></td>
+<td>keep KMS control, cut request volume</td>
+</tr>
+<tr>
+<td>56</td>
+<td>external sharing audit</td>
+<td>IAM Access Advisor</td>
+<td><strong>IAM Access Analyzer</strong></td>
+<td>repeat — different services</td>
+</tr>
+<tr>
+<td>59</td>
+<td>multiple KDS consumers, lag</td>
+<td>swap to SQS Standard</td>
+<td><strong>Enhanced Fan-Out</strong></td>
+<td>repeat — contention, not producer/consumer mismatch</td>
+</tr>
+<tr>
+<td>61</td>
+<td>S3 lifecycle, immediate access always</td>
+<td>Glacier Flexible Retrieval</td>
+<td><strong>Standard-IA</strong></td>
+<td>repeat — "immediate access" kills Glacier</td>
+</tr>
+<tr>
+<td>62</td>
+<td>Aurora single instance, add AZ failover</td>
+<td>standby instance</td>
+<td><strong>replica instance</strong> (Aurora has no standby concept)</td>
+<td>Aurora HA = reader replicas, not Multi-AZ standby</td>
+</tr>
+<tr>
+<td>63</td>
+<td>ALB removes unhealthy, ASG doesn't replace</td>
+<td>swapped which uses which check</td>
+<td><strong>ASG=EC2 check (default), ALB=ALB check</strong></td>
+<td>repeat — two independent systems</td>
+</tr>
+<tr>
+<td>65</td>
+<td>SQS batch processing, no downtime, cost</td>
+<td>RI + On-Demand for spikes</td>
+<td><strong>RI + Spot for spikes</strong></td>
+<td>queue absorbs Spot interruption — repeat</td>
+</tr>
+</tbody>
+</table>
+<p><strong>10 of 17 were T1–T4 repeats or live Q&amp;A from earlier this session</strong> (CNAME wording, Instance Store, CloudFront up+down, WAF-on-CloudFront, Access Analyzer, Enhanced Fan-Out, Standard-IA/AZ, ALB/ASG health checks, Spot+SQS). Repeats are now the dominant failure mode, not new concepts.</p>
+<hr />
+</div></details><details class="sec" id="new-in-test-5-not-in-bank-t1-t4-wrap"><summary class="sech2" id="new-in-test-5-not-in-bank-t1-t4">New in Test 5 (not in bank / T1–T4)</summary><div class="secbody">
+<p><strong>Kinesis producer errors</strong>
+- <code>ProvisionedThroughputExceededException</code> from sending records <strong>one at a time</strong> at high rate → fix is <strong><code>PutRecords</code> batching</strong>, not adding shards
+- only reshard if batching alone still exceeds per-shard limits (1,000 records/sec or 1 MB/sec write)</p>
+<p><strong>EBS encryption scope</strong>
+- encrypts: data at rest, all snapshots, <strong>and data in transit between the volume and the instance</strong>
+- HIPAA/compliance questions naming "volume to instance" traffic → still covered, no extra step needed</p>
+<p><strong>File exchange modernization (SFTP)</strong>
+- Linux-only shared file system → <strong>EFS</strong>, not FSx for Lustre (Lustre = HPC scratch, not general shared storage)
+- AWS Transfer Family SFTP → run <strong>inside a VPC</strong> with EIPs, not "public endpoint"
+- user-level file permissions → <strong>POSIX identity mapping</strong> (EFS) + IAM policy, not plain SG-only</p>
+<p><strong>EC2 Instance Connect mechanics</strong>
+- pushes a <strong>temporary public SSH key</strong> to the instance (60-second validity) via API, then you connect over the instance's <strong>public IP</strong> (or via Instance Connect Endpoint for private IP without one)
+- doesn't require SSM Agent, doesn't need "disabling" anything — it's a separate, simpler mechanism than Session Manager</p>
+<p><strong>Built-in EC2 recovery actions on CloudWatch alarms</strong>
+- CloudWatch alarm actions on an EC2 instance can directly: <strong>Reboot</strong>, <strong>Stop</strong>, <strong>Terminate</strong>, <strong>Recover</strong> — no Lambda/EventBridge needed
+- "auto-restart on failure, simplest" → CloudWatch alarm + native alarm action, not a custom Lambda poller</p>
+<p><strong>RDS DR — Region scope</strong>
+- Multi-AZ = same-Region HA, not DR
+- automated backups can be configured to copy <strong>cross-Region</strong> — that's what makes it disaster recovery capable
+- "resilient from a DR perspective" → must include cross-Region, not just Multi-AZ</p>
+<p><strong>KMS request-cost optimization</strong>
+- <strong>S3 Bucket Keys</strong> — one KMS-generated key reused per bucket for many objects, cuts KMS API call volume/cost while staying on SSE-KMS
+- switching to SSE-S3 loses KMS features (audit trail, key rotation control, cross-account key policies) — not the fix if KMS control must stay</p>
+<p><strong>Aurora HA terminology</strong>
+- Aurora has <strong>no "Multi-AZ standby"</strong> concept like standard RDS
+- HA = <strong>Aurora Replica</strong> (up to 15, can be manually or auto promoted to writer on failover)
+- if a question says "standby" for Aurora specifically, it's the wrong term/wrong option</p>
+<hr />
+</div></details><details class="sec" id="session-notes-q-amp-a-during-test-5-wrap"><summary class="sech2" id="session-notes-q-amp-a-during-test-5">Session Notes — Q&amp;A during Test 5</summary><div class="secbody">
+<p><strong>IAM identity services — quick differentiation</strong>
+- <strong>IAM Identity Center</strong> — your employees logging into <strong>AWS accounts/console</strong> (Org-wide SSO)
+- <strong>AD Connector</strong> — on-prem AD exists, people log into <strong>AWS apps</strong> with existing creds (proxy only, no AWS-side directory)
+- <strong>Managed Microsoft AD</strong> — actual AD <strong>running in AWS</strong> for workloads (domain join, SQL Server) and/or trust relationship
+- test: "log into AWS console/apps" → Identity Center/AD Connector. "Workload needs AD/domain join/trust" → Managed Microsoft AD</p>
+<p><strong>ASG unhealthy-not-replaced — real vs fake causes</strong>
+- real: Impaired (waits to self-recover) · health check type=EC2 default (ignores ELB failures) · grace period after launch
+- fake/distractor: needing custom health checks, being Spot, raised minimum capacity</p>
+<p><strong>RAM shared subnet — when it's "cheapest"</strong>
+- multiple accounts (same Org) need EC2 in the <strong>same subnet/network</strong>, privately, cheapest → RAM shared subnet (no hourly charge, just IAM-level sharing)
+- vs 2 VPCs need connectivity cheapest → Peering; many VPCs/transitive → Transit Gateway</p>
+<p><strong>CloudFront on an API (EC2/ALB origin)</strong>
+- yes — helps even for APIs: edge TLS termination, keep-alive to origin, caching for cacheable GETs, WAF/DDoS at edge
+- for a single-Region API, <strong>Global Accelerator also helps</strong> (routes onto AWS backbone) — the "GA is TCP/UDP only, doesn't help HTTPS" idea is a misconception; HTTPS runs over TCP, GA works fine
+- Route 53 has <strong>no role</strong> improving performance for a single-Region deployment (nothing to choose between)</p>
+<p><strong>Subnet/route table basics</strong>
+- route tables associate at the <strong>subnet level</strong>, not per instance
+- public subnet = route table has <code>0.0.0.0/0 → IGW</code> + instance has public/EIP
+- private subnet = route table has <code>0.0.0.0/0 → NAT GW</code> (or no route)
+- IGW attaches at VPC level but only enables internet for subnets whose route table points to it
+- NACL is stateless — must explicitly allow both directions on custom NACLs (default NACL allows all)</p>
+<p><strong>Sentiment analysis / audio-to-SQL</strong>
+- automated sentiment scoring, managed, no ML expertise → <strong>Comprehend</strong>
+- "convert audio to text then ad-hoc/exploratory SQL analysis" (not sentiment scoring) → <strong>Transcribe + Athena</strong>
+- QuickSight = BI/dashboards only, not a SQL query engine or sentiment tool</p>
+<p><strong>Caching geospatial data</strong>
+- <strong>ElastiCache for Redis</strong> — native GEOADD/GEORADIUS/GEODIST commands
+- Memcached does not support geospatial</p>
+<p><strong>RDS Multi-AZ failover</strong>
+- DB <strong>endpoint/URL never changes</strong> — only what the CNAME resolves to (standby's IP) changes internally
+- watch wording: "URL will change" (false) vs "CNAME target updated, URL unchanged" (true)</p>
+<p><strong>Storage for 3 different needs in 1 scenario</strong>
+- max I/O performance (scratch/processing) → <strong>Instance Store</strong>
+- durable storage → <strong>S3</strong>
+- archive → <strong>Glacier</strong>
+- don't try to solve all three needs with different S3 storage classes alone — S3 itself isn't a performance tier</p>
+<p><strong>POSIX</strong>
+- Linux/Unix-style permissions (owner/group/other, rwx) — not Windows
+- this is why EFS is POSIX/Linux-only; FSx for Windows exists separately for NTFS ACLs</p>
+<p><strong>Error-page routing (R53)</strong>
+- active-passive (failover routing policy + health check) — not active-active/weighted</p>
+<p><strong>Reporters upload/download 500MB videos, remote offices</strong>
+- correct (2 valid): <strong>CloudFront</strong> (supports PUT/POST too, not download-only) AND <strong>S3 Transfer Acceleration</strong>
+- wrong: per-Region separate buckets, EC2+EBS relay jobs
+- S3TA = S3-specific, no caching, simplest. CloudFront = general edge network, adds caching — both valid for many up+down questions, check for multi-select before eliminating one</p>
+<p><strong>WAF attachment points</strong>
+- CloudFront, ALB, API Gateway (REST only, not HTTP API), AppSync, Cognito User Pool, Verified Access
+- not directly on EC2 or NLB
+- if no CloudFront in stem → WAF on ALB/API Gateway; if CloudFront exists → WAF on CloudFront is usually the "earlier/more complete" answer
+- watch for absolute words in options ("only," "cannot," "always") — often the actual trap, not the architecture choice</p>
+<p><strong>IAM Access Advisor vs Access Analyzer</strong>
+- <strong>Access Advisor</strong> — what a specific user/role has actually <em>used</em> recently (rightsizing, removing unused perms)
+- <strong>Access Analyzer</strong> — scans policies to find resources <strong>shared externally</strong> (cross-account/cross-org exposure)
+- "unused permissions" → Advisor. "unintended external sharing" → Analyzer</p>
+<p><strong>Kinesis Enhanced Fan-Out</strong>
+- multiple consumer apps on the same stream sharing the 2 MB/s per-shard pipe → contention/lag → <strong>Enhanced Fan-Out</strong> gives each consumer its own dedicated 2 MB/s
+- different from producer-outpacing-consumer (fix = more shards + more consumer parallelism), read which noun ("consumers," plural) the lag is about</p>
+<p><strong>S3 lifecycle "immediate access" trap</strong>
+- "rarely accessed" alone doesn't mean Glacier — check if immediate/instant access is also required
+- rarely accessed + instant access → Standard-IA (ms retrieval, just costs more per-GB retrieval)
+- rarely accessed + retrieval delay OK → Glacier tiers</p>
+<p><strong>ALB vs ASG health checks — the anomaly pattern</strong>
+- ALB target group health check and ASG health check are <strong>two independent systems</strong>
+- ALB always uses its own target-group health check (HTTP ping) — that's normal, not a bug
+- ASG defaults to <strong>EC2</strong> health check type, ignoring ALB's verdict entirely, unless explicitly set to <strong>ELB</strong> type
+- "ALB removes instance from pool but ASG doesn't replace it" → ASG health check type is still EC2 (default)</p>
+<p><strong>Spot + SQS "no downtime" — how that's true</strong>
+- "no downtime" refers to the <strong>system</strong>, not any single instance
+- SQS visibility timeout means an interrupted Spot instance's in-flight message just becomes visible again and gets reprocessed — no data loss, brief delay only
+- "withstand interruptions, queue-based/decoupled/batch" → Spot is safe; synchronous user-facing (no queue buffer) → Spot is wrong</p>
+<hr />
+</div></details><details class="sec" id="test-6-udemy-65-q-48-65-74-wrap" open><summary class="sech2" id="test-6-udemy-65-q-48-65-74">Test 6 — Udemy (65 Q) — 48/65 = 74%</summary><div class="secbody">
+<input class="tfilter" placeholder="Filter this table…" data-target="table-18"><div class="tcount" id="table-18-cnt"></div><table id="table-18">
+<thead>
+<tr>
+<th>Domain</th>
+<th>Wrong/Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Resilient</td>
+<td>7/19 ← weakest</td>
+</tr>
+<tr>
+<td>Secure</td>
+<td>5/19</td>
+</tr>
+<tr>
+<td>High-Performing</td>
+<td>3/13</td>
+</tr>
+<tr>
+<td>Cost-Optimized</td>
+<td>2/14</td>
+</tr>
+</tbody>
+</table>
+<input class="tfilter" placeholder="Filter this table…" data-target="table-19"><div class="tcount" id="table-19-cnt"></div><table id="table-19">
+<thead>
+<tr>
+<th>#</th>
+<th>Topic</th>
+<th>I picked</th>
+<th>Correct</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7</td>
+<td>EC2 querying crypto-mining IPs</td>
+<td>WAF</td>
+<td><strong>GuardDuty</strong></td>
+<td>threat detection, not a firewall job</td>
+</tr>
+<tr>
+<td>9</td>
+<td>high-throughput request-response, save dev/deploy cost</td>
+<td>SQS FIFO</td>
+<td><strong>SQS temporary queues</strong></td>
+<td>repeat — request-response pattern, not ordering</td>
+</tr>
+<tr>
+<td>13</td>
+<td>multi-account firewall via Firewall Manager, DDoS context</td>
+<td>VPC Route Table</td>
+<td><strong>Shield Advanced</strong></td>
+<td>Firewall Manager can centrally deploy Shield Advanced protections too</td>
+</tr>
+<tr>
+<td>23</td>
+<td>shared block storage, same AZ, Multi-Attach</td>
+<td>gp SSD</td>
+<td><strong>Provisioned IOPS (io1/io2)</strong></td>
+<td>Multi-Attach only supported on io1/io2</td>
+</tr>
+<tr>
+<td>27</td>
+<td>rate-based rule for request flood</td>
+<td>Shield Advanced + rate-based rule</td>
+<td><strong>WAF + rate-based rule</strong></td>
+<td>repeat — "rate-based rule" = WAF terminology</td>
+</tr>
+<tr>
+<td>30</td>
+<td>instance store facts</td>
+<td>"preserved during hibernation" etc</td>
+<td><strong>"can't detach/reattach"</strong></td>
+<td>instance store is physically bound to host, ephemeral</td>
+</tr>
+<tr>
+<td>32</td>
+<td>root email alerts missed</td>
+<td>change root email + IAM notifications</td>
+<td><strong>alias + centralized mailbox + AWS Alternate Contacts</strong></td>
+<td>Alternate Contacts is the actual built-for-purpose feature</td>
+</tr>
+<tr>
+<td>34</td>
+<td>run script only once at launch</td>
+<td>"ensure runs only during boot" (implies extra config)</td>
+<td><strong>user data scripts alone</strong></td>
+<td>user data already runs once at first boot by default</td>
+</tr>
+<tr>
+<td>37</td>
+<td>priority processing pro vs lite</td>
+<td>2 FIFO queues, short/long poll split</td>
+<td><strong>2 Standard queues, poll pro queue preferentially</strong></td>
+<td>priority = polling order, not FIFO/ordering feature</td>
+</tr>
+<tr>
+<td>40</td>
+<td>RDS Multi-AZ OS patching mechanics</td>
+<td>"async replication keeps in sync" (wrong fact for the question)</td>
+<td><strong>maintenance on standby → promote → maintenance on old primary</strong></td>
+<td>patching sequence, not sync description</td>
+</tr>
+<tr>
+<td>41</td>
+<td>monolith, single-instance failover, can't scale horizontally</td>
+<td>ALB + ASG min1/max2</td>
+<td><strong>ASG min=1/max=1/desired=1 + EIP re-attach via user-data</strong></td>
+<td>app can't run distributed — ALB across 2 instances breaks it</td>
+</tr>
+<tr>
+<td>42</td>
+<td>relational DB joins, cache, multi-threading</td>
+<td>ElastiCache Redis</td>
+<td><strong>ElastiCache Memcached</strong></td>
+<td>Memcached is multi-threaded; Redis is single-threaded</td>
+</tr>
+<tr>
+<td>44</td>
+<td>HA bastion host</td>
+<td>public ALB + ASG</td>
+<td><strong>public NLB + ASG</strong></td>
+<td>bastion = SSH/RDP (TCP), not HTTP — needs NLB</td>
+</tr>
+<tr>
+<td>46</td>
+<td>DX to on-prem, access S3 directly, private/no internet</td>
+<td>Private VIF + VPC endpoint</td>
+<td><strong>Public VIF</strong></td>
+<td>S3 is a public AWS service — needs Public VIF, not Private</td>
+</tr>
+<tr>
+<td>49</td>
+<td>keep server-bound licenses when migrating</td>
+<td>Dedicated Instances</td>
+<td><strong>Dedicated Hosts</strong></td>
+<td>licenses bind to physical host/socket/core — only Hosts expose that</td>
+</tr>
+<tr>
+<td>52</td>
+<td>private hosted zone custom domain</td>
+<td>enableDnsDomain</td>
+<td><strong>enableDnsSupport</strong></td>
+<td>that's the actual VPC attribute name</td>
+</tr>
+<tr>
+<td>61</td>
+<td>Spot Fleet composition</td>
+<td>Spot only</td>
+<td><strong>Spot + optionally On-Demand</strong></td>
+<td>Fleet can mix both</td>
+</tr>
+</tbody>
+</table>
+<p><strong>7 of 17 in Resilient domain</strong> — now the clear weak spot, overtaking High-Performing from T3–T5.</p>
+<hr />
+</div></details><details class="sec" id="new-in-test-6-not-in-bank-t1-t5-wrap"><summary class="sech2" id="new-in-test-6-not-in-bank-t1-t5">New in Test 6 (not in bank / T1–T5)</summary><div class="secbody">
+<p><strong>GuardDuty vs WAF</strong>
+- GuardDuty = <strong>threat detection</strong> (analyzes VPC Flow Logs, DNS logs, CloudTrail for malicious activity like crypto-mining IP calls, compromised credentials, port scanning)
+- WAF = <strong>blocks/filters</strong> web requests by rule (rate, IP, geo, SQLi/XSS) — doesn't "detect" background malicious behavior like DNS queries to known bad IPs
+- "EC2 instance querying/calling known malicious IPs" → GuardDuty, not WAF</p>
+<p><strong>EBS Multi-Attach</strong>
+- lets <strong>multiple EC2 instances</strong> (same AZ) attach the <strong>same EBS volume</strong> simultaneously
+- only supported on <strong>io1/io2</strong> (Provisioned IOPS) — never gp2/gp3/st1/sc1
+- app must handle concurrent write coordination itself (needs cluster-aware filesystem)</p>
+<p><strong>AWS Alternate Contacts</strong>
+- per-account contacts for <strong>Billing / Operations / Security</strong>, separate from root email
+- built specifically to fix "critical alert went to root email nobody watches"
+- pair with a root-email alias forwarding to a monitored mailbox for defense in depth</p>
+<p><strong>User data run-once behavior</strong>
+- user data scripts run <strong>once, at first boot, by default</strong> — no extra config needed
+- re-running on every boot requires special opt-in (<code>cloud-init</code> directives), not default
+- "run custom script only once at launch" → plain user data already satisfies this</p>
+<p><strong>SQS priority pattern</strong>
+- SQS itself has <strong>no native priority</strong> — build it with <strong>two separate queues</strong> (Standard, not FIFO — ordering ≠ priority) and have consumers <strong>poll the high-priority queue first</strong>, falling back to the low-priority one
+- FIFO would only matter if strict ordering within a class were required, which this scenario doesn't ask for</p>
+<p><strong>RDS Multi-AZ OS patching sequence</strong>
+- AWS patches the <strong>standby</strong> first → promotes standby to primary (brief failover) → patches the <strong>old primary</strong> (which is now the new standby)
+- this is how zero/minimal-downtime patching works — not simply "replication keeps them in sync"</p>
+<p><strong>Single-instance monolith HA pattern</strong>
+- app can't run on &gt;1 instance at once → <strong>ASG min=1/max=1/desired=1</strong> (self-healing single instance, not scaled)
+- attach a fixed <strong>Elastic IP</strong> via EC2 user-data script on boot so the IP follows to whichever instance ASG launches
+- no ALB — ALB implies routing across multiple targets, which breaks a non-distributed app</p>
+<p><strong>ElastiCache engine choice — threading</strong>
+- <strong>Redis</strong> = single-threaded (per node), rich data structures (sorted sets, geospatial, pub/sub), persistence, replication
+- <strong>Memcached</strong> = multi-threaded, simple key-value only, no persistence, no replication — but scales better across CPU cores for pure caching
+- "multi-threading" explicitly required → Memcached, even though Redis is the "richer" default answer everywhere else</p>
+<p><strong>Bastion host load balancer type</strong>
+- bastion = SSH (22) / RDP (3389), pure <strong>TCP</strong>, not HTTP
+- ALB is L7 (HTTP/HTTPS) — wrong fit
+- HA bastion → <strong>NLB</strong> (L4) + ASG</p>
+<p><strong>Direct Connect VIF for S3 access</strong>
+- <strong>Public VIF</strong> — reach AWS public service endpoints (S3, DynamoDB) over DX, still private/dedicated path, no public internet
+- <strong>Private VIF</strong> — reach resources <em>inside a VPC</em> (via VGW)
+- "access S3 directly over DX, no internet" → Public VIF, not Private VIF + VPC endpoint (VPC endpoints are irrelevant to on-prem-via-DX)</p>
+<p><strong>Dedicated Instances vs Dedicated Hosts</strong>
+- <strong>Dedicated Instances</strong> — physical isolation, but you don't control/see the underlying host ID, so <strong>can't track socket/core/host affinity</strong> for licensing
+- <strong>Dedicated Hosts</strong> — full visibility and control of the physical host (ID, sockets, cores) — required for <strong>BYOL / per-socket/per-core licensing</strong>
+- "bring existing server-bound licenses" → always Dedicated Hosts, not Dedicated Instances</p>
+<p><strong>VPC DNS attributes</strong>
+- <code>enableDnsSupport</code> — enables Route 53 resolution within the VPC (required for private hosted zones to work)
+- <code>enableDnsHostnames</code> — assigns DNS hostnames to instances
+- there is no <code>enableDnsDomain</code> attribute — distractor/fake name</p>
+<p><strong>Spot Fleet composition</strong>
+- Spot Fleet can request <strong>Spot Instances only, or a mix of Spot + On-Demand</strong>, across multiple instance types/pools
+- "Spot Fleet = Spot only" is a false absolute — watch for this pattern generally (see Blind Spot 17)</p>
+<hr />
+</div></details><details class="sec" id="session-notes-q-amp-a-during-test-6-wrap"><summary class="sech2" id="session-notes-q-amp-a-during-test-6">Session Notes — Q&amp;A during Test 6</summary><div class="secbody">
+<p><strong>Multi-site AWS connectivity (DX + 2× VPN)</strong>
+- central hub → <strong>Transit Gateway</strong> (attach DX via Transit VIF + both VPN connections)
+- if TGW not offered as an option and multiple Site-to-Site VPNs terminate on one VGW needing to reach each other → legacy <strong>AWS VPN CloudHub</strong></p>
+<p><strong>SQS queue types — the only two real types</strong>
+- <strong>Standard</strong> (nearly unlimited throughput, at-least-once, best-effort order) and <strong>FIFO</strong> (strict order + exactly-once, 300/3,000 batched, up to ~70k/s with high-throughput mode)
+- DLQ, delay queues, temporary queues = <strong>features/add-ons</strong>, not alternative "types" — don't let an option imply otherwise
+- <strong>Temporary Queue Client</strong> — auto-deleting, lightweight queues for high-throughput request-response patterns (real, not a distractor — correct answer in both T6 Q9 and earlier T6 dupe)</p>
+<p><strong>Athena + storage classes</strong>
+- queries S3 <strong>Standard, Standard-IA, One Zone-IA, Intelligent-Tiering</strong> directly
+- <strong>cannot</strong> query Glacier tiers without restoring first</p>
+<hr />
+</div></details><details class="sec" id="concept-notes-wrap"><summary class="sech2" id="concept-notes">Concept Notes</summary><div class="secbody">
+<h3 id="savings-plans-vs-ri">Savings Plans vs RI</h3>
+<ul>
+<li>database → <strong>RI only</strong> (no SP for RDS/Redshift/ElastiCache/OpenSearch)</li>
+<li>flexible / Lambda / Fargate → <strong>Compute SP</strong> (66%)</li>
+<li>locked family+Region, bigger discount → <strong>EC2 Instance SP</strong> (72%)</li>
+<li>capacity guarantee in one AZ → <strong>RI</strong></li>
+<li>interruptible → <strong>Spot</strong></li>
+<li>~2.5% of questions. Don't over-invest.</li>
+</ul>
+<h3 id="sns-sqs-eventbridge-step-functions">SNS · SQS · EventBridge · Step Functions</h3>
+<ul>
+<li><strong>SQS</strong> — 1 message → 1 consumer. Many pollers = share work, not broadcast</li>
+<li><strong>SNS</strong> — copy to every subscriber. Fan-out combo: SNS → many SQS</li>
+<li><strong>EventBridge</strong> — AWS events, schedules, content-based routing</li>
+<li><strong>Step Functions</strong> — multi-step, retries, waits. Chaining Lambdas = wrong answer</li>
+<li>EventBridge starts things · Step Functions orders things</li>
+</ul>
+<h3 id="kinesis">Kinesis</h3>
+<ul>
+<li><strong>Firehose</strong> → S3, Redshift, OpenSearch, Splunk, HTTP. <strong>Never DynamoDB</strong></li>
+<li><strong>Data Streams</strong> → replay, multiple consumers, custom processing</li>
+<li>Firehose doesn't need Data Streams in front</li>
+<li><strong>shard</strong> = one lane · <strong>partition key</strong> picks the lane · order within shard only · bad key = hot shard</li>
+</ul>
+<h3 id="databases">Databases</h3>
+<ul>
+<li>Aurora = RDS family · RDS Proxy supports it</li>
+<li>Aurora = MySQL/PostgreSQL only, never SQL Server</li>
+<li><strong>Aurora Global</strong> = 1 writer · <strong>DynamoDB Global Tables</strong> = write anywhere</li>
+<li>too many connections (esp. Lambda) → <strong>RDS Proxy</strong></li>
+<li>Multi-AZ = availability · read replica = performance</li>
+<li><strong>Multi-AZ engine upgrade = both at once, downtime.</strong> Not rolling</li>
+<li>Redshift speaks SQL too — SQL alone identifies nothing</li>
+<li>OLTP → RDS/Aurora · warehouse/MPP → Redshift · files in S3 → Athena</li>
+<li>RDS storage autoscaling = opt-in feature · Aurora storage = automatic to 128 TiB</li>
+<li>unpredictable <strong>compute</strong> → Aurora Serverless v2</li>
+</ul>
+<h3 id="read-replica-vs-cache">Read replica vs cache</h3>
+<ul>
+<li>same data repeatedly → <strong>ElastiCache</strong> (DynamoDB → <strong>DAX</strong>)</li>
+<li>many different reads / reporting → <strong>read replica</strong></li>
+<li>"no app changes" → read replica (cache needs cache-aside code)</li>
+<li>microseconds → cache · milliseconds fine → replica</li>
+</ul>
+<h3 id="storage">Storage</h3>
+<ul>
+<li><strong>SMB = Windows · NFS = Linux</strong></li>
+<li>SMB/AD/DFS/NTFS → <strong>FSx Windows</strong></li>
+<li>NFS simple → <strong>EFS</strong></li>
+<li>HPC/EDA/chip design/genomics → <strong>FSx Lustre</strong> (+S3 link for cold)</li>
+<li>both SMB+NFS → <strong>FSx NetApp ONTAP</strong></li>
+<li>EFS = regional · cross-Region DR → <strong>EFS Replication</strong></li>
+<li>EFS access = <strong>SG (port 2049) + IAM policy</strong> · access points = POSIX user/dir</li>
+<li>highest random I/O + replicated/re-creatable → <strong>Instance Store</strong></li>
+</ul>
+<h3 id="s3-lifecycle">S3 lifecycle</h3>
+<p><code>S3 Standard
+          ┌──────────────┴──────────────┐
+          ▼                             ▼
+    Standard-IA ──────────────▶ Intelligent-Tiering
+          └──────────────┬──────────────┘
+                         ▼
+                   One Zone-IA
+                         ▼
+              Glacier Instant Retrieval
+                         ▼
+                 Glacier Flexible
+                         ▼
+                   Deep Archive</code></p>
+<ul>
+<li>nothing returns to Standard</li>
+<li>Standard-IA → Intelligent-Tiering = only sideways move (not reverse)</li>
+<li>One Zone-IA = dead end, Glacier only</li>
+<li>30 days in Standard before IA · &lt;128 KB not transitioned</li>
+<li><strong>min charge:</strong> Standard none · IA/One Zone 30d · Glacier IR 90d · Flexible 90d · Deep Archive 180d</li>
+<li>no wait required <em>before</em> moving to Deep Archive — 180d is a billing minimum</li>
+</ul>
+<h3 id="s3-object-lock">S3 Object Lock</h3>
+<ul>
+<li>retention on the <strong>object version</strong>, never "the object"</li>
+<li><strong>bucket default = duration</strong> · <strong>version = Retain Until Date</strong></li>
+<li>explicit beats bucket default</li>
+<li>needs versioning</li>
+<li>Governance = overridable with permission · Compliance = nobody, not even root</li>
+<li>Legal hold = no date, on/off</li>
+<li>was correct <strong>9/9</strong> in the bank</li>
+</ul>
+<h3 id="s3-misc">S3 misc</h3>
+<ul>
+<li><strong>uploads free</strong> · only egress costs</li>
+<li>S3TA bills only if it actually accelerated</li>
+<li>cache S3 → <strong>CloudFront</strong> (no DAX equivalent)</li>
+<li><strong>One Zone-IA wrong 19/19</strong> in the bank — trap</li>
+<li>encryption: SSE-S3 (free, no audit) · SSE-KMS AWS key · <strong>SSE-KMS customer managed key = audit + rotation + revoke</strong> · SSE-C (you send key, AWS stores nothing, <strong>no rotation</strong>) · CSE</li>
+<li>customer <em>managed</em> key (in KMS) ≠ customer <em>provided</em> key (SSE-C)</li>
+</ul>
+<h3 id="networking">Networking</h3>
+<ul>
+<li>content-based routing → <strong>ALB only</strong> (path, host, header, query, method, source IP — not body)</li>
+<li>UDP → <strong>NLB or Global Accelerator</strong> only</li>
+<li><strong>GA</strong> = static IP, IP allowlist, instant failover, TCP/UDP, keeps own DNS</li>
+<li><strong>R53</strong> = DNS routing policies, slow failover (TTL)</li>
+<li>Direct Connect <strong>not encrypted</strong> → "dedicated + encrypted" = <strong>DX + VPN</strong></li>
+<li>same-AZ private IP free · cross-AZ $0.01/GB each way · public IP charged even same-AZ</li>
+<li>CloudFront custom origin can be on-prem (must be publicly reachable)</li>
+<li>SG (instance, allow only) → NACL (subnet, <strong>only thing that denies an IP</strong>) → Network Firewall (VPC, IDS/IPS)</li>
+<li>geo: R53 routes · CloudFront geo restriction blocks · WAF blocks — pick by what's in the architecture</li>
+<li><strong>R53 Resolver:</strong> VPC→on-prem names = <strong>outbound</strong> · on-prem→AWS names = <strong>inbound</strong></li>
+</ul>
+<h3 id="hybrid-3-layers">Hybrid — 3 layers</h3>
+<ol>
+<li><strong>pipe</strong> — Direct Connect (dedicated, weeks) · S2S VPN (encrypted, quick) · Client VPN (laptops)</li>
+<li><strong>data</strong> — Storage Gateway (use cloud storage locally) · DataSync (scheduled copy) · Snowball (offline bulk) · DMS (database)</li>
+<li><strong>identity</strong> — AD Connector · Managed Microsoft AD · IAM Identity Center</li>
+</ol>
+<p><strong>Storage Gateway</strong> = umbrella. File (NFS/SMB→S3) · Volume (iSCSI; <strong>cached</strong> = S3 primary + local hot cache, <strong>stored</strong> = all local + async backup) · Tape (VTL)</p>
+<h3 id="identity">Identity</h3>
+<input class="tfilter" placeholder="Filter this table…" data-target="table-20"><div class="tcount" id="table-20-cnt"></div><table id="table-20">
+<thead>
+<tr>
+<th>Option</th>
+<th>Tell</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IAM role</td>
+<td>anything inside AWS — never access keys</td>
+</tr>
+<tr>
+<td>IAM Identity Center</td>
+<td>employees + multiple accounts + SSO</td>
+</tr>
+<tr>
+<td>AD Connector</td>
+<td>on-prem AD, least ops, <strong>people</strong> logging in</td>
+</tr>
+<tr>
+<td>Managed Microsoft AD</td>
+<td>Windows <strong>workload</strong> in AWS, or "trust"</td>
+</tr>
+<tr>
+<td>Simple AD</td>
+<td>small, cheap, standalone</td>
+</tr>
+<tr>
+<td>SAML 2.0</td>
+<td>Okta/ADFS + single account</td>
+</tr>
+<tr>
+<td>Web identity / OIDC</td>
+<td>Google/Facebook/Apple</td>
+</tr>
+<tr>
+<td>Cognito User Pool</td>
+<td>customers sign up/sign in</td>
+</tr>
+<tr>
+<td>Cognito Identity Pool</td>
+<td>that app calls S3/DynamoDB directly</td>
+</tr>
+<tr>
+<td>IAM Roles Anywhere</td>
+<td>on-prem servers need AWS creds (certs)</td>
+</tr>
+<tr>
+<td>STS AssumeRole</td>
+<td>cross-account</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>filter by <strong>who logs in</strong>: employees → Identity Center · customers → Cognito · machines → roles</li>
+<li>Connector = borrow · Managed = own · Simple = cheap</li>
+<li>"application needing AD" = Windows workload in AWS (SQL Server, .NET, WorkSpaces)</li>
+<li>cross-account steps: role in <strong>target</strong> acct + trust policy → permissions → source users get <code>sts:AssumeRole</code></li>
+</ul>
+<h3 id="organizations">Organizations</h3>
+<ul>
+<li>Organizations = container + billing · OU = folder · SCP = one rule</li>
+<li><strong>SCP</strong> = one guardrail · <strong>Control Tower</strong> = whole starter kit (OUs, log archive, audit acct)</li>
+<li>verb: "prevent/restrict" → SCP · "set up/landing zone" → Control Tower</li>
+<li>SCPs <strong>only restrict, never grant</strong> · <strong>don't apply to management account</strong></li>
+<li>every account has its own root user (unique email); control via SCP + <code>OrganizationAccountAccessRole</code></li>
+<li><strong>permissions boundary</strong> = ceiling on what can be granted, for delegation. User/role only, never group</li>
+<li>protect one resource → deletion protection / explicit Deny</li>
+</ul>
+<h3 id="cross-account-networking-cost">Cross-account networking cost</h3>
+<p><strong>RAM shared subnet (free) &lt; VPC Peering (cheap, per-pair) &lt; Transit Gateway (scales, per-attachment + per-GB)</strong></p>
+<ul>
+<li>RAM = share subnet/TGW/License Manager/R53 Resolver rules, no duplication</li>
+<li>peering = no transitive routing, doesn't scale past a few</li>
+<li>TGW already exists + shared services → <strong>Shared Services VPC</strong> (not "Transit VPC" = legacy pre-TGW trap)</li>
+</ul>
+<h3 id="multi-az-sizing">Multi-AZ sizing</h3>
+<ul>
+<li>need N survivors → total = <strong>N + N/AZs</strong>, spread evenly</li>
+<li>more AZs = cheaper for same guarantee → pick the option with most AZs</li>
+<li>≥4 survivors: 2 AZ×4 = 8 · <strong>3 AZ×2 = 6</strong> ✓</li>
+</ul>
+<h3 id="compute">Compute</h3>
+<ul>
+<li>ECS <strong>free</strong> both launch types · EC2 type = pay instances · Fargate = per-second vCPU/mem</li>
+<li><strong>EKS = $0.10/hr control plane</strong> → why ECS+Fargate wins cost+overhead</li>
+<li>EKS pod perms → <strong>IRSA / Pod Identity</strong> (SA annotated with role ARN). Node role = anti-pattern. 1 SA per workload</li>
+<li>scaling policy: "maintain/keep at" → <strong>target tracking</strong> · cooldown → simple · tiers → step</li>
+<li>ASG: unhealthy = terminate→launch · AZ rebalance &amp; Instance Refresh = launch→terminate</li>
+<li><strong>termination order:</strong> most-populated AZ → oldest launch config/template (<strong>config counts as older</strong>) → closest to billing hour → random</li>
+<li><strong>ASG won't terminate unhealthy:</strong> Impaired (recovery window) · type=EC2 while ELB fails · grace period not expired</li>
+<li>false: custom checks DO terminate · Spot IS terminated · raised min launches new, doesn't keep bad</li>
+<li>placement: <strong>Cluster = fast · Spread = safe (7/AZ) · Partition = big data</strong></li>
+<li><strong>Lambda concurrency = 1,000/Region default</strong></li>
+<li><strong>Hibernate</strong> = saves RAM to disk, restores state. User Data = first launch only, and re-runs the slow part anyway</li>
+<li>"can withstand failures / afford delay / interruptible" → <strong>Spot</strong></li>
+<li>ASG = long-running service · <strong>Fleet</strong> = one-off batch, various sizes, cheapest capacity</li>
+</ul>
+<h3 id="analytics-amp-ai">Analytics &amp; AI</h3>
+<ul>
+<li><strong>Glue</strong> = code ETL · <strong>Glue Studio</strong> = visual ETL job · <strong>DataBrew</strong> = visual clean/prep for analysts</li>
+<li>"no code" + analysts + prepare/clean → DataBrew · + pipeline/job → Glue Studio</li>
+<li>MPP / warehouse → <strong>Redshift</strong> · SQL-trained models → <strong>Redshift ML</strong> ("Athena ML" doesn't exist)</li>
+<li>text entities/sentiment → <strong>Comprehend</strong> · images → Rekognition · scanned docs → Textract · custom model → SageMaker</li>
+</ul>
+<h3 id="in-memory">In-memory</h3>
+<ul>
+<li><strong>ElastiCache</strong> = cache in front of DB</li>
+<li><strong>MemoryDB</strong> = durable primary, in-memory</li>
+<li><strong>DAX</strong> = DynamoDB only, microseconds</li>
+</ul>
+<h3 id="secrets">Secrets</h3>
+<ul>
+<li><strong>Secrets Manager</strong> = credentials + <strong>rotation</strong></li>
+<li><strong>Parameter Store</strong> = plain config; can hold SecureString but <strong>no auto-rotation</strong> → "rotate" always = Secrets Manager</li>
+</ul>
+<hr />
+</div></details><details class="sec" id="cumulative-keyword-hacks-wrap"><summary class="sech2" id="cumulative-keyword-hacks">Cumulative Keyword Hacks</summary><div class="secbody">
+<input class="tfilter" placeholder="Filter this table…" data-target="table-21"><div class="tcount" id="table-21-cnt"></div><table id="table-21">
+<thead>
+<tr>
+<th>See this</th>
+<th>Pick</th>
+<th>From</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Data kept &lt;30 days</td>
+<td>S3 Standard (no min duration)</td>
+<td>T1</td>
+</tr>
+<tr>
+<td>Infrequent but instant</td>
+<td>S3 Standard-IA</td>
+<td>T1</td>
+</tr>
+<tr>
+<td>Re-creatable + single AZ</td>
+<td>S3 One Zone-IA</td>
+<td>T1</td>
+</tr>
+<tr>
+<td>Copy AMI to another Region</td>
+<td>AMI <strong>+ snapshot</strong> appear</td>
+<td>T1</td>
+</tr>
+<tr>
+<td>"Least ops" + data already exists</td>
+<td>connect, don't copy</td>
+<td>T1</td>
+</tr>
+<tr>
+<td>Ordered + &gt;300 msg/s</td>
+<td>SQS FIFO <strong>with batching</strong> (max 3,000)</td>
+<td>T1</td>
+</tr>
+<tr>
+<td>Expose 1 service to another account</td>
+<td>PrivateLink + NLB</td>
+<td>T1</td>
+</tr>
+<tr>
+<td>T-SQL + minimal refactoring</td>
+<td>Babelfish</td>
+<td>T1</td>
+</tr>
+<tr>
+<td>ASG AZ rebalancing</td>
+<td>launches first, then terminates</td>
+<td>T1</td>
+</tr>
+<tr>
+<td>"Minimal refactoring" + existing DB</td>
+<td>keep same engine</td>
+<td>T1</td>
+</tr>
+<tr>
+<td>MPP / data warehouse</td>
+<td>Redshift (Serverless if "no infra")</td>
+<td>T1</td>
+</tr>
+<tr>
+<td>Train ML with SQL</td>
+<td>Redshift ML</td>
+<td>T1</td>
+</tr>
+<tr>
+<td>Extract entities/sentiment from text</td>
+<td>Comprehend (not SageMaker)</td>
+<td>T1</td>
+</tr>
+<tr>
+<td>Geo-block + ALB in architecture</td>
+<td>WAF geo match</td>
+<td>T1</td>
+</tr>
+<tr>
+<td>Geo-block + CloudFront in architecture</td>
+<td>CloudFront geo restriction</td>
+<td>T1</td>
+</tr>
+<tr>
+<td>Serverless requests dropped at scale</td>
+<td>Lambda concurrency (1,000)</td>
+<td>T1</td>
+</tr>
+<tr>
+<td>Cap what employees can grant</td>
+<td>permissions boundary</td>
+<td>T1</td>
+</tr>
+<tr>
+<td>Firehose destinations</td>
+<td>S3, Redshift, OpenSearch, Splunk, HTTP — <strong>never DynamoDB</strong></td>
+<td>T1</td>
+</tr>
+<tr>
+<td>Highest random I/O + app replicates</td>
+<td>Instance Store</td>
+<td>T1</td>
+</tr>
+<tr>
+<td>EC2 → EFS access control</td>
+<td>SG + IAM policy</td>
+<td>T1</td>
+</tr>
+<tr>
+<td>"Dedicated <strong>and</strong> encrypted" to on-prem</td>
+<td>Direct Connect + VPN</td>
+<td>Q&amp;A</td>
+</tr>
+<tr>
+<td>Own DNS + fast Region failover</td>
+<td>Global Accelerator</td>
+<td>Q&amp;A</td>
+</tr>
+<tr>
+<td>UDP mentioned</td>
+<td>NLB or Global Accelerator only</td>
+<td>Q&amp;A</td>
+</tr>
+<tr>
+<td>Content/path/host routing</td>
+<td>ALB</td>
+<td>Q&amp;A</td>
+</tr>
+<tr>
+<td>DFS / SMB / AD file shares</td>
+<td>FSx Windows</td>
+<td>Q&amp;A</td>
+</tr>
+<tr>
+<td>EDA, chip design, HPC, parallel</td>
+<td>FSx Lustre</td>
+<td>Q&amp;A</td>
+</tr>
+<tr>
+<td>Windows <strong>and</strong> Linux same share</td>
+<td>FSx NetApp ONTAP</td>
+<td>Q&amp;A</td>
+</tr>
+<tr>
+<td>VPC resolving on-prem names</td>
+<td>R53 Resolver <strong>outbound</strong></td>
+<td>Q&amp;A</td>
+</tr>
+<tr>
+<td>On-prem resolving AWS names</td>
+<td>R53 Resolver <strong>inbound</strong></td>
+<td>Q&amp;A</td>
+</tr>
+<tr>
+<td>3+ VPCs / transitive routing</td>
+<td>Transit Gateway</td>
+<td>Q&amp;A</td>
+</tr>
+<tr>
+<td>Block one IP</td>
+<td>NACL</td>
+<td>Q&amp;A</td>
+</tr>
+<tr>
+<td>Credentials that rotate</td>
+<td>Secrets Manager</td>
+<td>Q&amp;A</td>
+</tr>
+<tr>
+<td>"Prevent/restrict" across accounts</td>
+<td>SCP</td>
+<td>Q&amp;A</td>
+</tr>
+<tr>
+<td>"Set up / landing zone"</td>
+<td>Control Tower</td>
+<td>Q&amp;A</td>
+</tr>
+<tr>
+<td>Employees into AWS accounts</td>
+<td>IAM Identity Center</td>
+<td>Q&amp;A</td>
+</tr>
+<tr>
+<td>On-prem AD + least ops, people</td>
+<td>AD Connector</td>
+<td>Q&amp;A</td>
+</tr>
+<tr>
+<td>Windows workload in AWS / "trust"</td>
+<td>Managed Microsoft AD</td>
+<td>Q&amp;A</td>
+</tr>
+<tr>
+<td>Customers sign up/sign in</td>
+<td>Cognito User Pool</td>
+<td>Q&amp;A</td>
+</tr>
+<tr>
+<td>That app calls S3/DynamoDB</td>
+<td>Cognito Identity Pool</td>
+<td>Q&amp;A</td>
+</tr>
+<tr>
+<td>On-prem servers need AWS creds</td>
+<td>IAM Roles Anywhere</td>
+<td>Q&amp;A</td>
+</tr>
+<tr>
+<td>Pod-level permissions in EKS</td>
+<td>IRSA / Pod Identity</td>
+<td>Q&amp;A</td>
+</tr>
+<tr>
+<td>"Maintain / keep CPU at X%"</td>
+<td>target tracking</td>
+<td>Q&amp;A</td>
+</tr>
+<tr>
+<td>Lowest inter-node latency</td>
+<td>Cluster placement group</td>
+<td>Q&amp;A</td>
+</tr>
+<tr>
+<td>Few critical instances, isolate HW</td>
+<td>Spread placement group (7/AZ)</td>
+<td>Q&amp;A</td>
+</tr>
+<tr>
+<td>Too many DB connections</td>
+<td>RDS Proxy</td>
+<td>Q&amp;A</td>
+</tr>
+<tr>
+<td>Write in every Region</td>
+<td>DynamoDB Global Tables</td>
+<td>Q&amp;A</td>
+</tr>
+<tr>
+<td>Relational cross-Region DR</td>
+<td>Aurora Global Database</td>
+<td>Q&amp;A</td>
+</tr>
+<tr>
+<td>No-code data cleaning, analysts</td>
+<td>Glue DataBrew</td>
+<td>Q&amp;A</td>
+</tr>
+<tr>
+<td>No-code ETL pipeline</td>
+<td>Glue Studio</td>
+<td>Q&amp;A</td>
+</tr>
+<tr>
+<td>In-memory durable primary DB</td>
+<td>MemoryDB</td>
+<td>Q&amp;A</td>
+</tr>
+<tr>
+<td>Key rotation / decrypt audit</td>
+<td>SSE-KMS customer managed key</td>
+<td>Q&amp;A</td>
+</tr>
+<tr>
+<td>WORM / legal hold / never delete</td>
+<td>S3 Object Lock (Compliance)</td>
+<td>Q&amp;A</td>
+</tr>
+<tr>
+<td>Bucket-level retention</td>
+<td>duration (version = date)</td>
+<td>Q&amp;A</td>
+</tr>
+<tr>
+<td>Uploading to S3</td>
+<td>free — only egress costs</td>
+<td>Q&amp;A</td>
+</tr>
+<tr>
+<td>Cheapest private multi-account EC2</td>
+<td>RAM shared subnet</td>
+<td>Q&amp;A</td>
+</tr>
+<tr>
+<td>Many VPCs + transitive (not cheapest)</td>
+<td>Transit Gateway</td>
+<td>Q&amp;A</td>
+</tr>
+<tr>
+<td>2 VPCs, cheapest pairwise</td>
+<td>VPC Peering</td>
+<td>Q&amp;A</td>
+</tr>
+<tr>
+<td>TGW exists + shared DNS/AD/NAT</td>
+<td>Shared Services VPC</td>
+<td>Q&amp;A</td>
+</tr>
+<tr>
+<td>Option says "Transit VPC"</td>
+<td>legacy trap when TGW present</td>
+<td>Q&amp;A</td>
+</tr>
+<tr>
+<td>"N must survive any AZ failure"</td>
+<td>most AZs; total = N + N/AZs</td>
+<td>Q&amp;A</td>
+</tr>
+<tr>
+<td>RDS Multi-AZ engine upgrade</td>
+<td>both at once, downtime</td>
+<td>Q&amp;A</td>
+</tr>
+<tr>
+<td>Avoid slow startup each stop/start</td>
+<td>EC2 Hibernate</td>
+<td>Q&amp;A</td>
+</tr>
+<tr>
+<td>ASG oldest: config vs template</td>
+<td><strong>config counts as older</strong></td>
+<td>T1+T2</td>
+</tr>
+<tr>
+<td>Same KMS key across Regions</td>
+<td>multi-Region key + replica (no conversion)</td>
+<td>T2</td>
+</tr>
+<tr>
+<td>Cap what a user can self-grant</td>
+<td>boundary on <strong>user/role</strong>, not group</td>
+<td>T2</td>
+</tr>
+<tr>
+<td>"Needs X instances Y% of time"</td>
+<td>commit to <strong>X</strong></td>
+<td>T2</td>
+</tr>
+<tr>
+<td>Many services, own prefix, 1 bucket</td>
+<td>S3 Access Points</td>
+<td>T2</td>
+</tr>
+<tr>
+<td>Fast traffic shift + DNS caching</td>
+<td>Global Accelerator</td>
+<td>T2</td>
+</tr>
+<tr>
+<td>Cross-account S3 write, owner denied</td>
+<td>default object ownership</td>
+<td>T2</td>
+</tr>
+<tr>
+<td>ASG won't kill unhealthy — real</td>
+<td>Impaired · type=EC2 vs ELB · grace period</td>
+<td>T2</td>
+</tr>
+<tr>
+<td>ASG won't kill unhealthy — false</td>
+<td>custom checks · Spot · raised minimum</td>
+<td>T2</td>
+</tr>
+<tr>
+<td>"Withstand failures / afford delay"</td>
+<td>Spot</td>
+<td>Q&amp;A</td>
+</tr>
+<tr>
+<td>Too many IPs to whitelist, multi-Region</td>
+<td>Global Accelerator (2 anycast IPs)</td>
+<td>T3</td>
+</tr>
+<tr>
+<td>Self-service pre-approved provisioning</td>
+<td>Service Catalog</td>
+<td>T3</td>
+</tr>
+<tr>
+<td>Push same stack to many accts/Regions</td>
+<td>CloudFormation StackSets</td>
+<td>T3</td>
+</tr>
+<tr>
+<td>Central OS patching, least ops</td>
+<td>SSM Default Host Management Config</td>
+<td>T3</td>
+</tr>
+<tr>
+<td>Scheduled OS patching windows</td>
+<td>SSM Patch Manager + Maintenance Window</td>
+<td>T3</td>
+</tr>
+<tr>
+<td>Different key per S3 object</td>
+<td><strong>SSE-S3</strong> (not SSE-KMS context)</td>
+<td>T3</td>
+</tr>
+<tr>
+<td>ECS scale metric source</td>
+<td>ECS <strong>Service</strong> CPU (not ALB/alarm)</td>
+<td>T3</td>
+</tr>
+<tr>
+<td>Windows apps + AD, shared storage</td>
+<td>FSx for Windows (not EFS)</td>
+<td>T3</td>
+</tr>
+<tr>
+<td>Large file upload <strong>and</strong> download, global</td>
+<td>S3 Transfer Acceleration</td>
+<td>T3</td>
+</tr>
+<tr>
+<td>Real-time streaming + analytics</td>
+<td>Kinesis Data Streams (+ Data Analytics)</td>
+<td>T3</td>
+</tr>
+<tr>
+<td>Single Python microservice, min ops</td>
+<td>Lambda + API Gateway</td>
+<td>T3</td>
+</tr>
+<tr>
+<td>Whole containerized web app, min ops</td>
+<td>App Runner</td>
+<td>T3</td>
+</tr>
+<tr>
+<td>JWT natively</td>
+<td>API Gateway <strong>HTTP API</strong></td>
+<td>T3</td>
+</tr>
+<tr>
+<td>Rate limit / burst / quota per client</td>
+<td>API Gateway usage plan</td>
+<td>T3</td>
+</tr>
+<tr>
+<td>Online automated accelerated migration</td>
+<td>DataSync</td>
+<td>T3</td>
+</tr>
+<tr>
+<td>Auto-recover impaired instance</td>
+<td>CW alarm on StatusCheckFailed_System</td>
+<td>T3</td>
+</tr>
+<tr>
+<td>Instance recover — RAM</td>
+<td><strong>lost</strong>; EBS kept</td>
+<td>T3</td>
+</tr>
+<tr>
+<td>Dedicated tenancy conflict</td>
+<td>most restrictive wins → dedicated</td>
+<td>T3</td>
+</tr>
+<tr>
+<td>Same physical AZ across accounts</td>
+<td>AZ <strong>ID</strong> (use1-az1)</td>
+<td>T3</td>
+</tr>
+<tr>
+<td>Site-to-Site VPN correct config</td>
+<td><strong>2 tunnels</strong>, own public IPs</td>
+<td>T3</td>
+</tr>
+<tr>
+<td>SQS/SNS/KMS privately from VPC</td>
+<td><strong>Interface</strong> endpoint (S3/DDB = Gateway)</td>
+<td>T3</td>
+</tr>
+<tr>
+<td>SCP exempt</td>
+<td>mgmt account + service-linked roles</td>
+<td>T3</td>
+</tr>
+<tr>
+<td>Encrypted snapshot/AMI copy</td>
+<td>always encrypted, key can change</td>
+<td>T3</td>
+</tr>
+<tr>
+<td>Cancel spot request</td>
+<td>instance keeps running</td>
+<td>T3</td>
+</tr>
+<tr>
+<td>Persistent spot reopens</td>
+<td>only on <strong>AWS</strong> interruption</td>
+<td>T3</td>
+</tr>
+<tr>
+<td>Prevent accidental DDB table delete</td>
+<td><strong>deletion protection</strong> (PITR = recover after)</td>
+<td>T4</td>
+</tr>
+<tr>
+<td>Trust policy</td>
+<td>resource-based, attached to role</td>
+<td>T4</td>
+</tr>
+<tr>
+<td>EFS spiky + low average throughput</td>
+<td>Bursting + General Purpose + Standard</td>
+<td>T4</td>
+</tr>
+<tr>
+<td>EFS IA / Archive</td>
+<td>storage cost only, no throughput effect</td>
+<td>T4</td>
+</tr>
+<tr>
+<td>ASG HA floor with cost optimization</td>
+<td>min = <strong>2</strong>, not one per AZ</td>
+<td>T4</td>
+</tr>
+<tr>
+<td>Beanstalk slow install</td>
+<td>golden AMI (static) + user data (dynamic)</td>
+<td>T4</td>
+</tr>
+<tr>
+<td>CloudFront multi-origin</td>
+<td>cache behavior path pattern (not price class)</td>
+<td>T4</td>
+</tr>
+<tr>
+<td>CloudFront origin failover</td>
+<td><strong>Origin Group</strong> (primary + secondary)</td>
+<td>T4</td>
+</tr>
+<tr>
+<td>Encrypt specific form fields at edge</td>
+<td>Field-Level Encryption</td>
+<td>T4</td>
+</tr>
+<tr>
+<td>Aurora storage options offered as gp2/io1</td>
+<td>fake — eliminate</td>
+<td>T4</td>
+</tr>
+<tr>
+<td>Thousands of reads+writes/sec, hot data</td>
+<td>ElastiCache Redis (not more replicas)</td>
+<td>T4</td>
+</tr>
+<tr>
+<td>"Without changing application logic"</td>
+<td>read replica</td>
+<td>T4</td>
+</tr>
+<tr>
+<td>Existing objects cross-Region S3→S3</td>
+<td><strong>S3 Batch Replication</strong> (CRR = new only)</td>
+<td>T4</td>
+</tr>
+<tr>
+<td>1 TB file upload from an app</td>
+<td><strong>multipart</strong> (5 GB single-PUT cap)</td>
+<td>T4</td>
+</tr>
+<tr>
+<td>Max VPN throughput</td>
+<td>multiple tunnels + <strong>ECMP over TGW</strong> (1.25 Gbps/tunnel)</td>
+<td>T4</td>
+</tr>
+<tr>
+<td>Static whitelistable IP for a service</td>
+<td><strong>NLB</strong> (EIP per AZ)</td>
+<td>T4</td>
+</tr>
+<tr>
+<td>Outbound fixed source IP to partner</td>
+<td>NAT GW + EIP</td>
+<td>T4</td>
+</tr>
+<tr>
+<td>Many IPs across SGs/route tables</td>
+<td>Managed Prefix List</td>
+<td>T4</td>
+</tr>
+<tr>
+<td>Multiple root domains, 1 ALB listener</td>
+<td><strong>SNI</strong> (wildcard = 1 root domain)</td>
+<td>T4</td>
+</tr>
+<tr>
+<td>Extend on-prem capacity to cloud</td>
+<td>Storage GW <strong>cached</strong> volumes</td>
+<td>T4</td>
+</tr>
+<tr>
+<td>Must keep full dataset local</td>
+<td>Storage GW <strong>stored</strong> volumes</td>
+<td>T4</td>
+</tr>
+<tr>
+<td>"Scaled-down but fully functional, running"</td>
+<td>Warm Standby</td>
+<td>T4</td>
+</tr>
+<tr>
+<td>"Core/DB only, servers off"</td>
+<td>Pilot Light</td>
+<td>T4</td>
+</tr>
+<tr>
+<td>EFS multi-AZ access</td>
+<td>one <strong>mount target per AZ</strong>, SG allow TCP 2049</td>
+<td>T4</td>
+</tr>
+<tr>
+<td>S3 → Kinesis, existing + ongoing</td>
+<td><strong>DMS</strong> (full load + CDC)</td>
+<td>T4</td>
+</tr>
+<tr>
+<td>HPC tightly coupled</td>
+<td>EFA · cluster placement group · enhanced networking</td>
+<td>T4</td>
+</tr>
+<tr>
+<td>Dedicated tenancy in a perf question</td>
+<td>distractor — isolation only</td>
+<td>T4</td>
+</tr>
+<tr>
+<td>Kinesis producer sends 1-by-1, throughput error</td>
+<td>batch with PutRecords, not more shards</td>
+<td>T5</td>
+</tr>
+<tr>
+<td>EBS HIPAA, volume↔instance traffic</td>
+<td>already encrypted</td>
+<td>T5</td>
+</tr>
+<tr>
+<td>Linux shared file system, modernize to SFTP</td>
+<td>EFS + Transfer Family in VPC + POSIX/IAM (not Lustre)</td>
+<td>T5</td>
+</tr>
+<tr>
+<td>Temp SSH, console, no key distribution</td>
+<td>EC2 Instance Connect (temp public key, public IP)</td>
+<td>T5</td>
+</tr>
+<tr>
+<td>EC2 keeps freezing, auto-restart</td>
+<td>CloudWatch alarm + native <strong>Reboot</strong> action</td>
+<td>T5</td>
+</tr>
+<tr>
+<td>"Resilient from DR perspective"</td>
+<td>Multi-AZ backup + <strong>cross-Region</strong> copy</td>
+<td>T5</td>
+</tr>
+<tr>
+<td>KMS request cost rising, keep KMS control</td>
+<td><strong>S3 Bucket Keys</strong> (not switch to SSE-S3)</td>
+<td>T5</td>
+</tr>
+<tr>
+<td>Aurora HA / failover target</td>
+<td><strong>replica</strong>, not "standby" (no Multi-AZ standby concept)</td>
+<td>T5</td>
+</tr>
+<tr>
+<td>IAM login to AWS console/apps</td>
+<td>Identity Center / AD Connector</td>
+<td>T5</td>
+</tr>
+<tr>
+<td>Workload needs AD / domain join / trust</td>
+<td>Managed Microsoft AD</td>
+<td>T5</td>
+</tr>
+<tr>
+<td>Single-Region API, improve global latency</td>
+<td>Global Accelerator (works fine over HTTPS)</td>
+<td>T5</td>
+</tr>
+<tr>
+<td>Route table association level</td>
+<td>subnet, not instance</td>
+<td>T5</td>
+</tr>
+<tr>
+<td>Audio → ad-hoc SQL analysis (not sentiment)</td>
+<td>Transcribe + Athena</td>
+<td>T5</td>
+</tr>
+<tr>
+<td>Caching + geospatial (lat/long) queries</td>
+<td>ElastiCache Redis (GEOADD etc.)</td>
+<td>T5</td>
+</tr>
+<tr>
+<td>Error page redirect in R53</td>
+<td>active-passive failover routing</td>
+<td>T5</td>
+</tr>
+<tr>
+<td>Max I/O + durable + archive, 3 needs</td>
+<td>Instance Store + S3 + Glacier (separately)</td>
+<td>T5</td>
+</tr>
+<tr>
+<td>WAF options with "only ALB/API GW"</td>
+<td>false claim — WAF also on CloudFront</td>
+<td>T5</td>
+</tr>
+<tr>
+<td>Unused permissions audit</td>
+<td>IAM Access Advisor</td>
+<td>T5</td>
+</tr>
+<tr>
+<td>Unintended external resource sharing</td>
+<td>IAM Access Analyzer</td>
+<td>T5</td>
+</tr>
+<tr>
+<td>Multiple KDS consumer apps, lag</td>
+<td>Enhanced Fan-Out</td>
+<td>T5</td>
+</tr>
+<tr>
+<td>Rarely accessed but immediate access required</td>
+<td>Standard-IA, not Glacier</td>
+<td>T5</td>
+</tr>
+<tr>
+<td>ALB drops unhealthy, ASG doesn't replace</td>
+<td>ASG health check type still EC2 (default)</td>
+<td>T5</td>
+</tr>
+<tr>
+<td>Spot + SQS "no downtime"</td>
+<td>queue absorbs interruption via visibility timeout</td>
+<td>T5</td>
+</tr>
+<tr>
+<td>EC2 calling known-malicious IPs</td>
+<td>GuardDuty, not WAF</td>
+<td>T6</td>
+</tr>
+<tr>
+<td>Shared EBS volume, multiple instances same AZ</td>
+<td>Multi-Attach, io1/io2 only</td>
+<td>T6</td>
+</tr>
+<tr>
+<td>Critical alert stuck at root email</td>
+<td>AWS Alternate Contacts (+ alias forwarding)</td>
+<td>T6</td>
+</tr>
+<tr>
+<td>Run script once at launch</td>
+<td>plain user data — already default behavior</td>
+<td>T6</td>
+</tr>
+<tr>
+<td>SQS "priority" processing</td>
+<td>2 Standard queues + poll high-priority first</td>
+<td>T6</td>
+</tr>
+<tr>
+<td>RDS Multi-AZ patch sequence</td>
+<td>standby patched → promoted → old primary patched</td>
+<td>T6</td>
+</tr>
+<tr>
+<td>Monolith app, single instance, can't scale</td>
+<td>ASG min=1/max=1/desired=1 + EIP via user-data, no ALB</td>
+<td>T6</td>
+</tr>
+<tr>
+<td>Cache needs multi-threading</td>
+<td>ElastiCache <strong>Memcached</strong>, not Redis</td>
+<td>T6</td>
+</tr>
+<tr>
+<td>HA bastion host</td>
+<td><strong>NLB</strong> + ASG (SSH/RDP = TCP, not HTTP)</td>
+<td>T6</td>
+</tr>
+<tr>
+<td>DX + access S3 directly, no internet</td>
+<td><strong>Public VIF</strong> (not Private VIF/endpoint)</td>
+<td>T6</td>
+</tr>
+<tr>
+<td>Server-bound/BYOL licenses</td>
+<td><strong>Dedicated Hosts</strong>, not Dedicated Instances</td>
+<td>T6</td>
+</tr>
+<tr>
+<td>Private hosted zone requires</td>
+<td><code>enableDnsSupport</code> (no such thing as enableDnsDomain)</td>
+<td>T6</td>
+</tr>
+<tr>
+<td>Spot Fleet composition</td>
+<td>can mix Spot + On-Demand, not Spot-only</td>
+<td>T6</td>
+</tr>
+<tr>
+<td>Multiple on-prem sites, DX+VPN, need to reach each other</td>
+<td>Transit Gateway (or legacy VPN CloudHub if no TGW option)</td>
+<td>T6</td>
+</tr>
+<tr>
+<td>SQS "types"</td>
+<td>only Standard/FIFO — DLQ/delay/temp are features, not types</td>
+<td>T6</td>
+</tr>
+<tr>
+<td>Athena on Glacier-tier S3 objects</td>
+<td>must restore first, can't query directly</td>
+<td>T6</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div></details><details class="sec" id="recurring-blind-spots-wrap"><summary class="sech2" id="recurring-blind-spots">Recurring Blind Spots</summary><div class="secbody">
+<ol>
+<li><strong>Not checking S3 minimum durations</strong> — cost questions turn on 30/90/180, not per-GB price</li>
+<li><strong>Assuming an integration exists</strong> — Firehose→DynamoDB, "Athena ML". Check the pairing is real</li>
+<li><strong>Skimming the architecture in the stem</strong> — WAF vs CloudFront was decided by what's already deployed</li>
+<li><strong>Treating serverless as infinite</strong> — Lambda 1,000 concurrency, FIFO 300/s. Numbers in the stem = recall a limit</li>
+<li><strong>Reaching for the bigger service</strong> — SageMaker over Comprehend, DynamoDB over Aurora. "Minimal change" → simpler wins</li>
+<li><strong>Over-restricting on security</strong> — "remove access for everyone" is almost always wrong; want boundaries/SCPs/scoped policies</li>
+<li><strong>Repeat misses (T1→T2)</strong> — RAM, AZ math, Shared Services VPC, Multi-AZ upgrade, Hibernate, launch config. Re-read these before Test 3</li>
+<li><strong>Legacy-name traps</strong> — Transit VPC vs Transit Gateway, launch configuration vs launch template, customer <em>managed</em> vs customer <em>provided</em> key</li>
+<li><strong>Metric source precision (new T3)</strong> — which <em>entity</em> emits the metric (ECS Service, not ALB/alarm; System check, not instance check)</li>
+<li><strong>Direction confusion (new T3)</strong> — R53 inbound vs outbound. Note: CloudFront also supports PUT/POST, so it CAN accelerate uploads too — S3TA vs CloudFront isn't upload-vs-download, it's "S3-only, no cache, simplest" (S3TA) vs "general edge network, adds caching" (CloudFront). Both valid for many up+download questions — check for multi-select before eliminating one</li>
+<li>
+<p><strong>Over-engineering encryption (new T3)</strong> — SSE-S3 already gives per-object keys; don't reach for KMS context</p>
+</li>
+<li>
+<p><strong>Prevent vs recover (new T4)</strong> — deletion protection ≠ PITR; SG ≠ IAM auth; the question's <em>verb</em> decides</p>
+</li>
+<li><strong>Wrong knob (new T4)</strong> — EFS storage class vs throughput mode; CloudFront price class vs cache behavior; Aurora "storage type" that doesn't exist</li>
+<li><strong>Not re-reading this log before the test (new T4)</strong> — 4 of 11 T4 misses were topics discussed live hours earlier</li>
+</ol>
+<p><strong>Trend:</strong> 74% → 80% → 82% → 83% → <strong>74% (T5 dropped)</strong>. 10 of 17 T5 misses were repeats of T1–T4 or same-session Q&amp;A — repetition, not new material, is now the main problem.</p>
+<ol start="15">
+<li><strong>Repeats outpacing new content (new T5)</strong> — CNAME wording, Instance Store, CloudFront up+down, WAF-on-CloudFront, Access Analyzer, Enhanced Fan-Out, Standard-IA vs AZ, ALB/ASG health checks, Spot+SQS all missed <em>again</em> after being discussed. Re-reading the log clearly isn't enough — need active recall, not just re-reading</li>
+<li><strong>Aurora ≠ standard RDS terminology (new T5)</strong> — Aurora has no "Multi-AZ standby," only replicas; don't transplant standard-RDS vocabulary onto Aurora questions</li>
+<li><strong>Absolute-word options (new T5)</strong> — "only," "cannot," "always" in an option is frequently where the false claim sits, independent of whether the underlying architecture idea is reasonable</li>
+</ol>
+<p><strong>Pre-Test-6 checklist (highest priority — repeated 2+ times now):</strong> RDS Multi-AZ CNAME wording · S3 max-I/O scenario → Instance Store not S3 · CloudFront supports upload too (S3TA vs CloudFront isn't upload-vs-download) · WAF attaches to CloudFront too · IAM Access Advisor vs Access Analyzer · Kinesis Enhanced Fan-Out (multi-consumer contention) · S3 "immediate access" → Standard-IA not Glacier · ALB health check (its own) vs ASG health check (defaults to EC2) · Spot+SQS visibility timeout absorbs interruption · Aurora replica vs standby.</p>
+<p><strong>T6 note:</strong> "Rate-based rule + Shield Advanced" (Q27) and "SQS temporary queue for request-response" (Q9) were <strong>both repeats from live Q&amp;A discussed just before this test</strong> — missed anyway. Confirms Blind Spot 15: re-reading isn't converting to recall under test conditions.</p>
+<ol start="18">
+<li><strong>False-absolute traps recurring (new T6)</strong> — "Spot Fleet = Spot only," "SQS types = Standard/FIFO/delay/DLQ," "WAF only on ALB/API Gateway" — same shape of trap (an option asserts a restriction that isn't real) keeps appearing across services. Actively scan every option for hidden "only/never/always/can't" before evaluating the architecture</li>
+<li><strong>Resilient domain now weakest (7/19, new T6)</strong> — Multi-AZ patch sequence, bastion NLB, monolith ASG pattern, Dedicated Hosts, Multi-Attach — mostly mechanics-of-a-specific-feature questions, not conceptual gaps</li>
+</ol>
+<p><strong>Pre-Test-7 checklist:</strong> GuardDuty vs WAF (detection vs blocking) · EBS Multi-Attach = io1/io2 only · Alternate Contacts vs root email · SQS "priority" = 2 queues + poll order, not FIFO · RDS Multi-AZ patch sequence (standby→promote→old primary) · monolith HA = ASG 1/1/1 + EIP, no ALB · Memcached for multi-threading vs Redis · bastion HA = NLB not ALB · Public VIF for S3 over DX · Dedicated Hosts for BYOL licensing · enableDnsSupport for private hosted zones · Spot Fleet mixes On-Demand.</p>
+<hr />
+<p><em>Test 7 appends above the cumulative sections.</em></p></div></details></main></div>
+<button id="burger">Contents</button><button id="top">Top</button>
+<script>
+document.querySelectorAll('.navh2').forEach(el=>{
+ el.onclick=()=>{
+  const id=el.dataset.target;
+  const d=document.getElementById(id+'-wrap');
+  d.open=true;
+  d.querySelector('summary').scrollIntoView({behavior:'smooth',block:'start'});
+  setActiveH2(el);
+  document.querySelector('nav').classList.remove('open');
+ };
+});
+document.querySelectorAll('.navkid').forEach(a=>{
+ a.onclick=(e)=>{
+  e.preventDefault();
+  const d=document.getElementById(a.dataset.target+'-wrap');
+  d.open=true;
+  const t=document.getElementById(a.getAttribute('href').slice(1));
+  t.scrollIntoView({behavior:'smooth',block:'start'});
+  document.querySelector('nav').classList.remove('open');
+ };
+});
+function setActiveH2(el){
+ document.querySelectorAll('.navh2').forEach(x=>x.classList.remove('on'));
+ el.classList.add('on');
+ const grp=el.closest('.navgrp');
+ document.querySelectorAll('.navgrp').forEach(g=>g.classList.remove('expanded'));
+ if(grp) grp.classList.add('expanded');
+}
+document.getElementById('expandAll').onclick=()=>document.querySelectorAll('details.sec').forEach(d=>d.open=true);
+document.getElementById('collapseAll').onclick=()=>document.querySelectorAll('details.sec').forEach(d=>d.open=false);
+document.querySelectorAll('details.sec').forEach(d=>{
+ d.addEventListener('toggle',()=>{
+  if(d.open){
+   const id=d.id.replace(/-wrap$/,'');
+   const navEl=document.querySelector('.navh2[data-target="'+id+'"]');
+   if(navEl) setActiveH2(navEl);
+  }
+ });
+});
+document.querySelectorAll('.tfilter').forEach(inp=>{
+ inp.addEventListener('input',()=>{
+  const table=document.getElementById(inp.dataset.target);
+  const q=inp.value.toLowerCase();
+  let shown=0,total=0;
+  table.querySelectorAll('tbody tr').forEach(tr=>{
+   total++;
+   const hit=tr.textContent.toLowerCase().includes(q);
+   tr.style.display=hit?'':'none';
+   if(hit)shown++;
+  });
+  const cnt=document.getElementById(inp.dataset.target+'-cnt');
+  if(cnt) cnt.textContent = q ? (shown+' of '+total+' rows') : '';
+ });
+});
+document.getElementById('top').onclick=()=>scrollTo({top:0,behavior:'smooth'});
+document.getElementById('burger').onclick=()=>document.querySelector('nav').classList.toggle('open');
+</script></body></html>
