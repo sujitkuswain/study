@@ -9,6 +9,7 @@ body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.55 -apple-system,
 header{position:sticky;top:0;z-index:10;background:#131a20;border-bottom:1px solid var(--line);padding:12px 16px}
 h1{margin:0 0 10px;font-size:17px;font-weight:600}
 h1 small{color:var(--mut);font-weight:400;font-size:13px;margin-left:8px}
+.filter-toggle{display:none}
 .ctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 input,select,button{background:#0d1317;color:var(--fg);border:1px solid var(--line);border-radius:6px;padding:7px 10px;font-size:14px;font-family:inherit}
 input[type=search]{flex:1;min-width:200px}
@@ -36,11 +37,20 @@ main{padding:0 16px 60px;max-width:1000px;margin:0 auto}
 .meta b{color:var(--fg)}
 mark{background:#3a4a13;color:#fff;border-radius:2px}
 .pg{display:flex;gap:8px;justify-content:center;padding:20px 0}
-@media(max-width:640px){main{padding:0 8px 60px}.q{padding:12px}}
+@media(max-width:640px){
+ main{padding:0 8px 60px}
+ .q{padding:12px}
+ .filter-toggle{display:block;width:100%;margin-top:8px;text-align:left}
+ .filter-toggle::after{content:' +';float:right;color:var(--acc);font-weight:700}
+ .filter-toggle[aria-expanded="true"]::after{content:' -'}
+ .ctl{display:none;padding-top:10px}
+ header.filters-open .ctl{display:flex}
+}
 </style></head><body>
 <header>
 <h1>SAA-C03 Practice Bank <small id="cnt"></small></h1>
-<div class="ctl">
+<button class="filter-toggle" id="filter-toggle" type="button" aria-expanded="false" aria-controls="filters">Show filters and actions</button>
+<div class="ctl" id="filters">
 <input type="search" id="q" placeholder="Search stem and options&hellip;">
 <select id="svc"><option value="">All services</option></select>
 <select id="trg"><option value="">All triggers</option></select>
@@ -117,6 +127,11 @@ $('conly').onclick=()=>{contested=!contested;$('conly').classList.toggle('on',co
 $('showall').onclick=()=>document.querySelectorAll('.q').forEach(c=>c.classList.add('reveal'));
 $('shuf').onclick=()=>{for(let i=view.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[view[i],view[j]]=[view[j],view[i]];}shown=0;$('list').innerHTML='';render();};
 $('more').onclick=render;
+$('filter-toggle').onclick=()=>{
+  const open=document.querySelector('header').classList.toggle('filters-open');
+  $('filter-toggle').setAttribute('aria-expanded',open);
+  $('filter-toggle').textContent=open?'Hide filters and actions':'Show filters and actions';
+};
 ['q','svc','trg','dom'].forEach(id=>$(id).addEventListener('input',filter));
 $('cnt').textContent=DATA.length+' questions \u00b7 '+DATA.filter(q=>q.ct).length+' contested';
 filter();
